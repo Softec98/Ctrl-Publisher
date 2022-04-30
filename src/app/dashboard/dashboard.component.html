@@ -1,0 +1,82 @@
+<div>
+    <br>
+      <div class="container">
+          <div class="container">
+            <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+                <div class="blocks" *ngIf="auth.isAuthenticated()">
+                    <button button="submit" mat-raised-button color="primary" (click)="openDialog2()">
+                        <mat-icon>add</mat-icon> {{'BUTTONS.ADD' | translate}} {{'PUBLISHER.THEME' | translate}} 
+                    </button>
+                </div>
+                <div class="blocks">
+                  <a button mat-raised-button color="primary" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">
+                    <mat-icon>input</mat-icon>{{'BUTTONS.LOGIN' | translate }} {{'BUTTONS.ADD' | translate | lowercase }} {{'PUBLISHER.THEME' | translate | lowercase}}
+                  </a>
+                </div>                
+          </div>
+      </div>
+      <br>
+      <div class="container">
+        <div fxLayout="row" fxLayoutAlign="center center" class="content">
+          <mat-card class="card" >
+            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+              <h3>{{'PUBLISHER.THEME' | translate}} </h3>
+            </mat-card-title>
+            <mat-card-content>
+                <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSource">
+
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.Name}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="nationalId">
+                            <mat-header-cell *matHeaderCellDef> C.P.F. </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.NationalId }} </mat-cell>
+                          </ng-container>                          
+
+                          <ng-container matColumnDef="areaCode">
+                            <mat-header-cell *matHeaderCellDef> DDD </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.AreaCode }} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="cellPhone">
+                            <mat-header-cell *matHeaderCellDef> Celular </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.CellPhone }} </mat-cell>
+                          </ng-container>                          
+
+                          <ng-container matColumnDef="baptismDate">
+                            <mat-header-cell *matHeaderCellDef> Data de Batismo </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ this.defaultLang == 'en' ? (element.BaptismDate | date: 'MM/dd/y':'utc') : (element.BaptismDate | date: 'dd/MM/y':'utc') }} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="birthDate">
+                            <mat-header-cell *matHeaderCellDef> Data de Nasc. </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{ this.defaultLang == 'en' ? (element.BirthDate | date: 'MM/dd/y':'utc') : (element.BirthDate | date: 'dd/MM/y':'utc') }} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="delete">
+                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                              <a (click)="openDialog2(element.Position)" type="button">
+                                <mat-icon class="edit">edit</mat-icon>
+                              </a>
+                              <a (click)="deletePublisher(element.Position)" type="button">
+                                <mat-icon class="icon">delete</mat-icon>
+                              </a>                              
+                            </mat-cell>
+                          </ng-container>
+
+                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+                          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                    </mat-table>
+                </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>

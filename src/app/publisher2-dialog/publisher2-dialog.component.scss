@@ -1,0 +1,45 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-radio-button~.mat-radio-button {
+    margin-left: 16px;
+}
+
+.label {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1.5em;
+    margin-block-start: -0.20em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    //font-weight: bold;
+}
+
+h1 {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.form-check-label {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.tab-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+    padding: 0 10px 0 5px;
+    border-radius: 5px;
+    background-color: ghostwhite;
+}
+
+.mat-icon {
+    padding-right: 10px;
+}
+
+// .mat-form-field-label {
+//     z-index: 1000;
+//     background-color: #ffffff;
+//     width: auto !important;
+//     padding: 0 10px;
+// }

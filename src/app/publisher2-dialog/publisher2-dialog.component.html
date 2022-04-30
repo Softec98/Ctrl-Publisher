@@ -1,0 +1,445 @@
+<form [formGroup]="form">
+
+    <mat-tab-group mat-align-tabs="start" dynamicHeight>
+
+        <mat-tab label="{{ 'REGISTER.PUBLISHER' | translate }}">
+
+            <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
+                fxLayoutGap.xs="2px">
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.NATIONALID' | translate}}</mat-label>
+                            <input #nationalId matInput placeholder="{{'PUBLISHER.NATIONALID' | translate}}"
+                                formControlName="NationalId" [textMask]="cpfMask" appSelectOnFocus>
+                            <!-- (keyup.enter)="obterPublicador()" -->
+                            <button matSuffix mat-button>
+                                <mat-icon (click)="obterPublicador()">search</mat-icon>
+                            </button>
+                            <mat-error *ngFor="let validation of publisher_validation_messages.nationalId">
+                                <mat-error class="error-message"
+                                    *ngIf="form.controls['NationalId'].errors?.[validation.type] && (form.controls['NationalId'].dirty || form.controls['NationalId'].touched)">
+                                    {{validation.message}}
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.GENERALID' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.GENERALID' | translate}}"
+                                formControlName="GeneralId" [textMask]="rgMask">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
+                        <input formControlName="Name" matInput placeholder="{{'PUBLISHER.NAME' | translate}}"
+                            maxlength="100" required>
+                        <mat-error *ngFor="let validation of publisher_validation_messages.name">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['Name'].errors?.[validation.type] && (form.controls['Name'].dirty || form.controls['Name'].touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="50%">
+                        <span class="label" matPrefix> {{'PUBLISHER.GENDER' | translate}}: </span>
+                        <mat-radio-group formControlName="Gender" aria-labelledby="example-radio-group-label"
+                            class="radio-group">
+                            <mat-radio-button [value]="gen.key" *ngFor="let gen of genders">{{ gen.value }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        <mat-error *ngFor="let validation of publisher_validation_messages.email">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['Gender'].errors?.[validation.type] && (form.controls['Gender'].dirty || form.controls['Gender'].touched)">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </div>
+
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.MARITALSTATUSID' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.MARITALSTATUSID' | translate}}"
+                                formControlName="MaritalStatusId">
+                                <mat-option value="-1">[ {{ selectSituation }} ]</mat-option>
+                                <mat-option *ngFor="let ms of maritalStatus" [value]="ms.key">
+                                    {{ ms.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'PUBLISHER.EMAIL' | translate}}</mat-label>
+
+                        <mat-icon matPrefix>email</mat-icon>
+                        <span matPrefix></span>
+
+                        <input formControlName="Email" matInput placeholder="{{'PUBLISHER.EMAIL' | translate}}"
+                            maxlength="100">
+
+                        <mat-error *ngFor="let validation of publisher_validation_messages.email">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['Email'].errors?.[validation.type] && (form.controls['Email'].dirty || form.controls['Email'].touched)">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%">
+                        <app-date-datepicker label="{{'PUBLISHER.BAPTISMDATE' | translate}}"
+                            formControlName="BaptismDate">
+                        </app-date-datepicker>
+                        <mat-error *ngFor="let validation of publisher_validation_messages.baptismDate">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['BaptismDate'].errors?.[validation.type] && (form.controls['BaptismDate'].dirty || form.controls['BaptismDate'].touched)">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </div>
+
+                    <div fxFlex="50%">
+                        <app-date-datepicker label="{{'PUBLISHER.BIRTHDATE' | translate}}" formControlName="BirthDate">
+                        </app-date-datepicker>
+                        <mat-error *ngFor="let validation of publisher_validation_messages.birthDate">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['BirthDate'].errors?.[validation.type] && (form.controls['BirthDate'].dirty || form.controls['BirthDate'].touched)">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.ZIPCODE' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.ZIPCODE' | translate}}" formControlName="ZipCode"
+                                (keyup.enter)="obterEndereco()" appMaskCep appSelectOnFocus>
+                            <button matSuffix mat-button>
+                                <mat-icon (click)="obterEndereco()">search</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="90%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.ADDRESS' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.ADDRESS' | translate}}" formControlName="Address"
+                                maxlength="100">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="160px">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.NUMBER' | translate}}</mat-label>
+                            <input #number matInput type="number" placeholder="{{'PUBLISHER.NUMBER' | translate}}"
+                                formControlName="Number" maxlength="10" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.COMPLEMENT' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.COMPLEMENT' | translate}}"
+                                formControlName="Complement" maxlength="30">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.SUBURB' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.SUBURB' | translate}}" formControlName="Suburb"
+                                maxlength="80">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.STATE' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.STATE' | translate}}"
+                                formControlName="State">
+                                <mat-option value="-1">[ {{ selectState }} ]</mat-option>
+                                <mat-option *ngFor="let st of states" [value]="st.key">
+                                    {{ st.key }}-{{ st.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="80%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.CITY' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.CITY' | translate}}" formControlName="City"
+                                maxlength="100">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="12%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.AREACODE' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.AREACODE' | translate}}"
+                                formControlName="AreaCode" maxlength="2" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="44%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.PHONENUMBER' | translate}}</mat-label>
+                            <span matPrefix></span>
+                            <mat-icon matPrefix>phone</mat-icon>
+                            <input matInput placeholder="{{'PUBLISHER.PHONENUMBER' | translate}}"
+                                formControlName="PhoneNumber" [textMask]="foneMask(8)" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="44%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.CELLPHONE' | translate}}</mat-label>
+                            <span matPrefix></span>
+                            <mat-icon matPrefix>phone</mat-icon>
+                            <input matInput placeholder="{{'PUBLISHER.CELLPHONE' | translate}}"
+                                formControlName="CellPhone" [textMask]="foneMask()" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div fxFlex="33%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.ASSIGNMENTID' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.ASSIGNMENTID' | translate}}"
+                                formControlName="AssignmentId">
+                                <mat-option value="-1">[ {{ selectAssignment }} ]</mat-option>
+                                <mat-option *ngFor="let am of assignments" [value]="am.key">
+                                    {{ am.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="33%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.SITUATIONID' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.SITUATIONID' | translate}}"
+                                formControlName="SituationId">
+                                <mat-option value="-1">[ {{ selectSituation }} ]</mat-option>
+                                <mat-option *ngFor="let si of situations" [value]="si.key">
+                                    {{ si.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="33%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.GROUPID' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.GROUPID' | translate}}"
+                                formControlName="GroupId">
+                                <mat-option value="-1">[ {{ selectGroup }} ]</mat-option>
+                                <mat-option *ngFor="let gr of groups" [value]="gr.key">
+                                    {{ gr.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div fxFlex="33%">
+                        <input type="checkbox" formControlName="IsAnointed" id="isAnointed" class="form-check-input">
+                        <label class="form-check-label" for="isAnointed">{{ 'PUBLISHER.ISANOINTED' | translate
+                            }}?</label>
+                    </div>
+                    <div fxFlex="33%">
+                        <input type="checkbox" formControlName="IsRegularPioneer" id="isRegularPioneer"
+                            class="form-check-input">
+                        <label class="form-check-label" for="isRegularPioneer">{{ 'PUBLISHER.ISREGULARPIONEER' |
+                            translate }}?</label>
+                    </div>
+                    <div fxFlex="33%">
+                        <input type="checkbox" formControlName="IsLegalRepresentative" id="isLegalRepresentative"
+                            class="form-check-input">
+                        <label class="form-check-label" for="isLegalRepresentative">{{
+                            'PUBLISHER.ISLEGALREPRESENTATIVE'
+                            | translate }}?</label>
+                    </div>
+                </div>
+
+                <br>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.NATIONALITY' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.NATIONALITY' | translate}}"
+                                formControlName="Nationality" maxlength="50">
+                            <button matSuffix mat-button>
+                                <mat-icon (click)="nacionalidadePadrao()">short_text</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="50%">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.OCUPATION' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.OCUPATION' | translate}}"
+                                formControlName="Ocupation" maxlength="50">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </mat-tab>
+
+        <mat-tab label="{{ 'REGISTER.MEDICAL' | translate }}">
+
+            <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
+                fxLayoutGap.xs="2px">
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="70%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
+                            <input matInput formControlName="Name" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="30%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.NATIONALID' | translate}}</mat-label>
+                            <input matInput formControlName="NationalId" [textMask]="cpfMask" readonly>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'PUBLISHER.REMARK' | translate}}</mat-label>
+                        <textarea matInput appearance="outline" rows="3"
+                            placeholder="{{'PUBLISHER.REMARK' | translate}}" formControlName="Remark"></textarea>
+                        <button matSuffix mat-button>
+                            <mat-icon (click)="tratamentoPadrao()">short_text</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="70%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.WITNESS1NAME' | translate}}</mat-label>
+                            <input matInput formControlName="Witness1Name" maxlength="100"
+                                placeholder="{{'PUBLISHER.WITNESS1NAME' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="30%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.WITNESS1GENERALID' | translate}}</mat-label>
+                            <input matInput formControlName="Witness1GeneralId" [textMask]="rgMask"
+                                placeholder="{{'PUBLISHER.WITNESS1GENERALID' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="70%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.WITNESS2NAME' | translate}}</mat-label>
+                            <input matInput formControlName="Witness2Name" maxlength="100"
+                                placeholder="{{'PUBLISHER.WITNESS2NAME' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="30%">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.WITNESS2GENERALID' | translate}}</mat-label>
+                            <input matInput formControlName="Witness2GeneralId" [textMask]="rgMask"
+                                placeholder="{{'PUBLISHER.WITNESS2GENERALID' | translate}}">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="33%">
+                        <app-legal-representative
+                            listaExclusao="{{ this.form.value.Id }}, {{ this.form.value.LegalRepresentative2Id ?? 0 }}"
+                            label="{{'PUBLISHER.LEGALREPRESENTATIVE1ID' | translate}}"
+                            formControlName="LegalRepresentative1Id">
+                        </app-legal-representative>
+                    </div>
+
+                    <div fxFlex="33%">
+                        <app-legal-representative
+                            listaExclusao="{{ this.form.value.Id }}, {{ this.form.value.LegalRepresentative1Id ?? 0 }}"
+                            label="{{'PUBLISHER.LEGALREPRESENTATIVE2ID' | translate}}"
+                            formControlName="LegalRepresentative2Id">
+                        </app-legal-representative>
+                    </div>
+
+                    <div fxFlex="33%">
+                        <app-date-datepicker hoje="true" label="{{'PUBLISHER.FILLDATE' | translate}}"
+                            formControlName="FillDate">
+                        </app-date-datepicker>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="warn" mat-dialog-close>{{'BUTTONS.CANCEL' | translate}}</button>
+        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="adicionarPublicador()"
+            [disabled]="form.invalid">{{ actionBtn }}</button>
+    </div>
+</form>
+
+<!-- <pre>{{ form.value | json }}</pre> -->

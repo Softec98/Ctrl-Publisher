@@ -1,0 +1,98 @@
+<div>
+
+  <br>
+
+  <div class="container">
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center"
+        class="content">
+
+        <div class="blocks" *ngIf="auth.isAuthenticated()">
+          <button button="button" mat-raised-button color="primary" (click)="openDialog2()">
+            <mat-icon>add</mat-icon> {{'BUTTONS.ADD' | translate}} {{'PUBLISHER.THEME' | translate}}
+          </button>
+        </div>
+        
+        <div class="blocks" *ngIf="!auth.isAuthenticated()">
+          <a button mat-raised-button color="primary" (click)="auth.login()" >
+            <mat-icon>input</mat-icon>{{'BUTTONS.LOGIN' | translate }} {{'BUTTONS.ADD' | translate | lowercase }}
+            {{'PUBLISHER.THEME' | translate | lowercase}}
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <mat-card class="card">
+        <mat-card-content>
+          <div style="margin-top: 10px">
+            <mat-form-field appearance="standard">
+              <mat-label>{{ 'BUTTONS.FILTER' | translate }}</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Maria" #input>
+            </mat-form-field>
+
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.NAME' | translate}}</th>
+                  <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nationalId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.NATIONALID' | translate}}</th>
+                  <td mat-cell *matCellDef="let row"> {{row.NationalId | cpf:false }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cellPhone">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.CELLPHONE' | translate}}</th>
+                  <td mat-cell *matCellDef="let row">{{ row.AreaCode + row.CellPhone | telefone }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="baptismDate">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.BAPTISMDATE' | translate}}</th>
+                  <td mat-cell *matCellDef="let row"> {{ this.defaultLang == 'en' ? (row.BaptismDate | date:
+                    'MM/dd/y':'utc') : (row.BaptismDate | date: 'dd/MM/y':'utc') }} ({{ row.BaptismAge }}) </td>
+                </ng-container>
+
+                <ng-container matColumnDef="birthDate">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.BIRTHDATE' | translate}}</th>
+                  <td mat-cell *matCellDef="let row"> {{ this.defaultLang == 'en' ? (row.BirthDate | date:
+                    'MM/dd/y':'utc') : (row.BirthDate | date: 'dd/MM/y':'utc') }} ({{ row.BirthAge }}) </td>
+                </ng-container>
+
+                <ng-container matColumnDef="assignment">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.ASSIGNMENTID' | translate}}</th>
+                  <td mat-cell *matCellDef="let row">
+                      {{ row.Assignment }}
+                  </td>
+                </ng-container>                
+
+                <ng-container matColumnDef="acoes">
+                  <th mat-header-cell *matHeaderCellDef>{{'BUTTONS.ACTIONS' | translate}}</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button (click)="openDialog2(row.Id)" mat-icon-button color="primary">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button (click)="deletePublisher(row.Id)" mat-icon-button color="warn">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>

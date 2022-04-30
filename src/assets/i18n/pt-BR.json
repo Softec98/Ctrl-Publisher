@@ -1,0 +1,64 @@
+{
+    "ERROR": {
+      "INVALID": "O campo é inválido!",
+      "EXISTS": "O publicador existe!"
+    },
+    "PUBLISHER":{
+      "REPORT": "Relatório",
+      "THEME": "Publicador",
+      "NAME": "Nome do publicador",
+      "BAPTISMDATE": "Data batismo (anos)",
+      "BIRTHDATE": "Data de nasc. (anos)",
+      "AGE": "Idade",
+      "GENDER": "Gênero",
+      "ZIPCODE": "CEP",
+      "ADDRESS": "Endereço",
+      "NUMBER": "Número",
+      "STATE": "UF",
+      "CITY": "Município",
+      "COMPLEMENT": "Complemento",
+      "SUBURB": "Bairro",
+      "AREACODE": "DDD",
+      "PHONENUMBER": "Telefone",
+      "CELLPHONE": "Celular",
+      "EMAIL": "E-mail",
+      "GROUPID": "Grupo",
+      "SITUATIONID": "Situação",
+      "MARITALSTATUSID": "Estado civil",
+      "ASSIGNMENTID": "Designação",
+      "ISANOINTED": "É ungido",
+      "ISREGULARPIONEER": "É pioneiro regular",
+      "GENERALID": "R.G.",
+      "NATIONALID": "C.P.F.",
+      "ISLEGALREPRESENTATIVE": "É procurador",
+      "NATIONALITY": "Nacionalidade",
+      "OCUPATION": "Ocupação",
+      "REMARK": "Observações sobre outros tratamentos de saúde",
+      "WITNESS1NAME": "Nome da 1ª Testemunha",
+      "WITNESS1GENERALID": "RG da 1ª Testemunha",
+      "WITNESS2NAME": "Nome da 2ª Testemunha",
+      "WITNESS2GENERALID": "RG da 2ª Testemunha",
+      "LEGALREPRESENTATIVE1ID": "1º Procurador",
+      "LEGALREPRESENTATIVE2ID": "2º Procurador",
+      "FILLDATE": "Data de preenchimento"
+    },
+    "BUTTONS": {
+      "ADD": "Incluir",
+      "EDIT": "Alterar",
+      "UPDATE": "Atualizar",
+      "DELETE": "Apagar",
+      "CANCEL": "Cancelar",
+      "SAVE": "Salvar",
+      "LOGIN": "Logar-se para",
+      "ACTIONS": "Ações",
+      "FILTER": "Filtro"
+    },
+    "REGISTER": {
+      "PUBLISHER": "Cadastro de Publicador",
+      "MEDICAL": "Diretivas médicas"
+    },
+    "PAGINATOR": {
+      "ITEMS_PER_PAGE": "Ítens por página",
+      "OF_LABEL": "de"
+    }
+}

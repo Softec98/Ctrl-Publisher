@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{data}}</h1>
+<div mat-dialog-content>
+  <form class="example-form" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <input matInput placeholder="{{'PUBLISHER.NAME' | translate}}" type="text" required [(ngModel)]="publisher.Name" name="Name">
+    </mat-form-field>
+    <div *ngIf="form!.get('Name')!.errors" style="color:red;">{{form!.get('Name')!.errors | inputError | translate}}</div>
+
+     <app-date-datepicker 
+        name="batism"
+        [(ngModel)]="publisher.BaptismDate"
+        [textMask]="mask">
+     </app-date-datepicker>
+
+     <app-date-datepicker 
+        name="birth"
+        [(ngModel)]="publisher.BirthDate"
+        [textMask]="mask">
+     </app-date-datepicker>     
+     
+     <mat-form-field>
+      <mat-select matInput placeholder="Sexo" required [(ngModel)]="publisher.Gender" name="gender">
+        <mat-option value="F">Feminino</mat-option>
+        <mat-option value="M">Masculino</mat-option>        
+      </mat-select>
+    </mat-form-field>    
+
+    <!-- <mat-form-field>
+      <mat-select matInput placeholder="Grupo" required [(ngModel)]="publisher.GroupId" name="groupId">
+        <mat-option *ngFor="let grp of groups" [value]="grp.key">
+          {{ grp.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+    <button mat-raised-button type="submit" color="primary">Salvar</button>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button class="close" (click)="onNoClick()" color="warn">Cancelar</button>
+</div>
