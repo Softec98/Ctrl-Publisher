@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../Services/data.service';
@@ -71,7 +71,18 @@ export class LegalRepresentativeComponent implements ControlValueAccessor, OnIni
     // this.listaExclusao.split(',').forEach(numero => { numeros.push(Number(numero)) })
     let numeros = [...this.listaExclusao.split(',')].map(numero => Number(numero))
 
-    this.legalRepresentatives = await this.dataService.getLegalRepresentatives(numeros)
+    await this.updatelegalRepresentatives(numeros);
+  }
+
+  private async updatelegalRepresentatives(numeros: number[]) {
+    this.legalRepresentatives = await this.dataService.getLegalRepresentatives(numeros);
+  }
+
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
+    if (typeof changes['listaExclusao'].previousValue != 'undefined') {
+      await this.updatelegalRepresentatives(changes['listaExclusao'].currentValue)
+      console.log('Legal 1: ' + changes['listaExclusao'].currentValue);
+    }
   }
 
   selectLegalRepresentative = this.defaultLang == 'en' ? 'Select a legal representative' : 'Selecione o procurador';

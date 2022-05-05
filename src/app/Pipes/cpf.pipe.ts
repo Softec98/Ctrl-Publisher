@@ -11,7 +11,7 @@ export class CpfPipe implements PipeTransform {
 
     valorFormatado = valorFormatado
       .padStart(11, '0')
-      .substr(0, 11)
+      .substring(0, 11)
       .replace(/[^0-9]/, '')
       .replace(
         /(\d{3})(\d{3})(\d{3})(\d{2})/,

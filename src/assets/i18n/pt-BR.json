@@ -8,7 +8,7 @@
       "THEME": "Publicador",
       "NAME": "Nome do publicador",
       "BAPTISMDATE": "Data batismo (anos)",
-      "BIRTHDATE": "Data de nasc. (anos)",
+      "BIRTHDATE": "Data de nasc. (idade)",
       "AGE": "Idade",
       "GENDER": "Gênero",
       "ZIPCODE": "CEP",
@@ -51,7 +51,8 @@
       "SAVE": "Salvar",
       "LOGIN": "Logar-se para",
       "ACTIONS": "Ações",
-      "FILTER": "Filtro"
+      "FILTER": "Filtro",
+      "SELECT": "Selecione"
     },
     "REGISTER": {
       "PUBLISHER": "Cadastro de Publicador",
@@ -59,6 +60,17 @@
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Ítens por página",
-      "OF_LABEL": "de"
+      "OF_LABEL": "de",
+      "NEXT_PAGE": "Próxima",
+      "PREVIOUS_PAGE": "Anterior"
+    },
+    "REPORT": {
+      "TYPE": "Tipo",
+      "VIDEOS": "Vídeos",
+      "PUBLICATIONS": "Publicações",
+      "REVISITS": "Revisitas",
+      "STUDIES": "Estudos",
+      "HOURS": "Horas",
+      "YEAR": "Ano"
     }
 }

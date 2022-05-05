@@ -1,0 +1,22 @@
+[
+    {
+        "key": 1,
+        "value": "Solteiro"
+    },
+    {
+        "key": 2,
+        "value": "Casado"
+    },
+    {
+        "key": 3,
+        "value": "Separado"
+    },
+    {
+        "key": 4,
+        "value": "Divorciado"
+    },
+    {
+        "key": 5,
+        "value": "Viúvo"
+    }
+]

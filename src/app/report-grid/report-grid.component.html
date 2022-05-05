@@ -1,0 +1,85 @@
+<mat-card class="card">
+    <mat-card-content>
+        <div style="margin-top: 10px">
+
+            <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                <div fxFlex="80%">
+                    <mat-form-field appearance="standard">
+                        <mat-label>{{ 'BUTTONS.FILTER' | translate }}</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Maria" #input>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="20%" style="text-align: right">
+                    <button button="button" mat-raised-button color="primary" (click)="openReport()">
+                        <mat-icon>add</mat-icon> {{'BUTTONS.ADD' | translate}} {{'PUBLISHER.REPORT' | translate}}
+                      </button>
+                </div>
+            </div>
+
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.NAME' | translate}}</th>
+                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.TYPE' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{ row.type }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="videos">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.VIDEOS' | translate}}</th>
+                        <td mat-cell *matCellDef="let row"> {{ row.videos }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="publications">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.PUBLICATIONS' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{ row.publications }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="revisits">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.REVISITS' | translate}}</th>
+                        <td mat-cell *matCellDef="let row"> {{row.revisits}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="studies">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.STUDIES' | translate}}</th>
+                        <td mat-cell *matCellDef="let row"> {{row.studies}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="hours">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.HOURS' | translate}}</th>
+                        <td mat-cell *matCellDef="let row"> {{row.hours}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acoes">
+                        <th mat-header-cell *matHeaderCellDef>{{'BUTTONS.ACTIONS' | translate}}</th>
+                        <td mat-cell *matCellDef="let row">
+                            <button (click)="openReport(row.Id)" mat-icon-button color="primary">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button (click)="deleteReport(row.Id)" mat-icon-button color="warn">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

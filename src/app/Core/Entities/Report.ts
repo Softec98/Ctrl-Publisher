@@ -1,9 +1,13 @@
 import { ReportDB } from './ReportDB';
+import { Utils } from "../Utils/Utils";
+import { IAuxiliar } from "../Interfaces/IAuxiliar";
 
 export class Report extends ReportDB {
 
     public Lang!: string;
     public TypeName!: string;
+
+    public types: IAuxiliar[] = [];
 
     log() {
         console.log(JSON.stringify(this));
@@ -17,6 +21,15 @@ export class Report extends ReportDB {
             this.Lang = 'pt-BR'
         }
 
-        this.TypeName = ReportDB.getTypes(this.Lang)?.find(x => x.key == this.TypeId)?.value!;
+        this.getTypes().then(() => {
+            this.TypeName = this.types.find(x => x.key == this.TypeId)?.value!;
+        });
+    }
+
+    private async getTypes() {
+        if (this.types.length == 0)
+            await Utils.getAuxiliar(`type-${this.Lang}`).then((aux) => {
+                this.types = aux;
+            });
     }
 }

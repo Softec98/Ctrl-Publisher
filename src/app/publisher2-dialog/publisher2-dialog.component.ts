@@ -4,8 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../Services/data.service';
 import { CepService } from '../Services/cep.service';
 import { PublisherDB } from '../Core/Entities/PublisherDB';
-import { GenericValidator } from '../Core/Utils/GenericValidator';
+import { Utils } from '../Core/Utils/Utils';
 import { environment } from 'src/environments/environment';
+import { IAuxiliar } from '../Core/Interfaces/IAuxiliar';
 
 @Component({
   selector: 'app-publisher2-dialog',
@@ -18,30 +19,27 @@ export class Publisher2DialogComponent implements OnInit {
   private defaultLang: string = this.dataService.getBrowserLang();
   private environLang: string = environment.defaultLang;
 
-  cpfMask = {
-    guide: true,
-    showMask: true,
-    mask: [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]
-  };
-
-  rgMask = {
-    guide: true,
-    showMask: true,
-    mask: [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d|X/]
-  };
-
-  public foneMask = function (numberLength = 9) {
-
+  cpfMask = Utils.cpfMask;
+  rgMask = Utils.rgMask;
+  foneMask(numberLength = 9) {
     return {
       guide: true,
       showMask: true,
-      mask: numberLength == 8 ? [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/] :
-        [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+      mask: numberLength == 9 ? Utils.fone9Mask : Utils.fone8Mask
     }
   }
 
   form!: FormGroup;
   actionBtn: string = this.dataService.getTranslation('SAVE', 'BUTTONS');
+  listaExclusao1!: string;
+  listaExclusao2!: string;
+
+  assignments: IAuxiliar[] = [];
+  groups: IAuxiliar[] = [];
+  situations: IAuxiliar[] = [];
+  maritalStatus: IAuxiliar[] = [];
+  genders: IAuxiliar[] = [];
+  states: IAuxiliar[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,7 +51,31 @@ export class Publisher2DialogComponent implements OnInit {
   @ViewChild("number") numberInputField!: ElementRef;
   //@ViewChild("nationalId") nationalIdInputField!: ElementRef;
 
+  private carregarSeletores() {
+    const promise1 = this.dataService.getAssignments();
+    const promise2 = this.dataService.getGroups();
+    const promise3 = this.dataService.getSituations();
+    const promise4 = this.dataService.getMaritalStatus();
+    const promise5 = this.dataService.getGenders();
+    const promise6 = this.dataService.getStates();
+    const promises = [promise1, promise2, promise3, promise4, promise5, promise6] 
+    Promise.allSettled(promises).
+      then((results) => results.forEach((result) => console.log(result.status))).
+      finally(() => this.atualizarSeletores());
+  }
+
+  private atualizarSeletores() {
+    this.assignments = this.dataService.assignments;
+    this.groups = this.dataService.groups,
+    this.situations = this.dataService.situations;
+    this.maritalStatus = this.dataService.maritalStatus;
+    this.genders = this.dataService.genders;
+    this.states = this.dataService.states;
+  }
+
   ngOnInit() {
+
+    this.carregarSeletores();
 
     let ultimoId: number = 0;
 
@@ -66,7 +88,7 @@ export class Publisher2DialogComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       Id: [this.data?.Id ?? ultimoId],
-      NationalId: this.formBuilder.control({ value: this.data?.NationalId ?? '', disabled: false }, GenericValidator.isValidCpf()),
+      NationalId: this.formBuilder.control({ value: this.data?.NationalId ?? '', disabled: false }, Utils.isValidCpf()),
       GeneralId: [this.data?.GeneralId ?? ''],
       Name: new FormControl(this.data?.Name ?? '', Validators.compose([
         Validators.required,
@@ -106,13 +128,42 @@ export class Publisher2DialogComponent implements OnInit {
     });
 
     if (this.data) {
-      this.actionBtn = this.dataService.getTranslation('UPDATE', 'BUTTONS');;
+      this.actionBtn = this.dataService.getTranslation('UPDATE', 'BUTTONS');
     }
+
+    let id = this.form.controls['Id'].value;
+    this.listaExclusao1 = this.atualizarlistaExclusao(id, 1);
+    this.listaExclusao2 = this.atualizarlistaExclusao(id, 2);
 
     // if (this.nationalIdInputField) {
     //   this.nationalIdInputField.nativeElement.setSelectionRange(0, 0);
     //   this.nationalIdInputField.nativeElement.focus();
     // }
+  }
+
+  private atualizarlistaExclusao(id: number, ordem: number): string {
+    if (ordem == 1) {
+      return `${id},${this.form.controls['LegalRepresentative2Id'].value ?? 0}`;
+    }
+    else {
+      return `${id},${this.form.controls['LegalRepresentative1Id'].value ?? 0}`;
+    }
+  }
+
+  aoSairDoProcurado(item: number, e: Event) {
+
+    let id = this.form.controls['Id'].value;
+
+    switch (item) {
+      case 1:
+        this.listaExclusao2 = `${id},${e ?? 0}`;
+        this.listaExclusao1 = this.atualizarlistaExclusao(id, 1);
+        break;
+      case 2:
+        this.listaExclusao1 = `${id},${e ?? 0}`;
+        this.listaExclusao2 = this.atualizarlistaExclusao(id, 2);
+        break;
+    }
   }
 
   private focarNoNumero() {
@@ -205,18 +256,6 @@ export class Publisher2DialogComponent implements OnInit {
   selectAssignment = this.defaultLang == 'en' ? 'Select an assignment' : 'Selecione a designação';
   selectSituation = this.defaultLang == 'en' ? 'Select a situation' : 'Selecione a situação';
   selectMaritalStatus = this.defaultLang == 'en' ? 'Select a marital status' : 'Selecione o estado civil';
-
-  states = PublisherDB.getStates(this.environLang);
-
-  groups = PublisherDB.getGroups(this.defaultLang);
-
-  genders = PublisherDB.getGenders(this.defaultLang);
-
-  situations = PublisherDB.getSituations(this.defaultLang);
-
-  assignments = PublisherDB.getAssignments(this.defaultLang);
-
-  maritalStatus = PublisherDB.getMaritalStatus(this.defaultLang);
 
   publisher_validation_messages = this.dataService.getPublisherValidation();
 }

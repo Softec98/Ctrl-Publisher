@@ -1,0 +1,24 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  th, td {
+    overflow: hidden;
+    width:auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  th:first-child, td:first-child {
+    width:25%;
+  }
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}

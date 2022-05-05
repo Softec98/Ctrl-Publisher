@@ -15,6 +15,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+
 @NgModule({
   imports: [
     MatSidenavModule,
@@ -30,7 +33,9 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatExpansionModule,
+    CdkAccordionModule    
   ],
   exports: [
     MatSidenavModule,
@@ -45,7 +50,9 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+    MatExpansionModule,
+    CdkAccordionModule    
   ]
 })
 

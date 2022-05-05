@@ -1,11 +1,12 @@
 import { AbstractControl, Validators } from "@angular/forms";
+import { IAuxiliar } from "../Interfaces/IAuxiliar";
 
-export class GenericValidator {
+export class Utils {
     constructor() { }
 
     static isValidCpf() {
         return (control: AbstractControl): Validators => {
-            const cpf = control.value == null ? '' :control?.value.replaceAll('.', '').replaceAll('-', '').replaceAll('_', '');
+            const cpf = control.value == null ? '' : control?.value.replaceAll('.', '').replaceAll('-', '').replaceAll('_', '');
             if (cpf) {
                 let numbers, digits, sum, i, result, equalDigits;
                 equalDigits = 1;
@@ -51,5 +52,39 @@ export class GenericValidator {
             }
             return '';
         };
+    }
+
+    static OnlyNumbers(campo: string) {
+        return campo?.match(/\d/g)?.join('')!;
+    }
+
+    static cpfMask = {
+        guide: true,
+        showMask: true,
+        mask: [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/]
+    };
+
+    static rgMask = {
+        guide: true,
+        showMask: true,
+        mask: [/\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d|X/]
+    };
+
+    static fone8Mask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    static fone9Mask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+
+    static calcAge(date: Date): number {
+        if (date) {
+            let timeDiff = Math.abs(Date.now() - new Date(date).getTime());
+            return Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
+        }
+        return 0;
+    }
+
+    static async getAuxiliar(arquivo: string) {
+        return await fetch(`../../assets/data/${arquivo}.json`).then(res => res.json())
+            .then(data => {
+                return data as IAuxiliar[];
+            });
     }
 }

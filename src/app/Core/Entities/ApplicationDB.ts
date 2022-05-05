@@ -1,22 +1,26 @@
 import Dexie from 'dexie';
 import { PublisherDB } from "./PublisherDB";
 import { ReportDB } from './ReportDB';
+import { CalendarDB } from './CalendarDB';
 
 export class ApplicationDB extends Dexie {
 
     publisher!: Dexie.Table<PublisherDB, number>;
     report!: Dexie.Table<ReportDB, number>;
+    calendar!: Dexie.Table<CalendarDB, number>;
 
     constructor() {
         super("PublisherControlDB");
 
         this.version(1).stores({
             publisher: "++Id, Name, NationalId, Gender, AssignmentId, GroupId, SituationId", // baptismDate, birthDate, isAnointed, assignmentId, isRegularPioneer, groupId, situationId, gender, zipCode, address, complement, number, suburb, city, state, areaCode, phoneNumber, cellPhone, email, remark, sequenceNumber, generalId, nationalId, ocupation, maritalStatusId, isLegalRepresentative, nationality, witness1Name, witness1GeneralId, witness2Name, witness2GeneralId, legalRepresentative1Id, legalRepresentative2Id, fillDate
-            report: "++Id, PublisherId, Calendar, TypeId" // Publications, Videos, Hours, Revisits, Studies
+            report: "++Id, PublisherId, Calendar, TypeId", // Publications, Videos, Hours, Revisits, Studies
+            calendar: "++Id, Calendar"
         });
 
         this.publisher.mapToClass(PublisherDB);
-        this.report.mapToClass(ReportDB)
+        this.report.mapToClass(ReportDB);
+        this.calendar.mapToClass(CalendarDB);
 
         this.on('populate', () => this.populate());
     }
@@ -178,11 +182,38 @@ export class ApplicationDB extends Dexie {
             })
         ]);
 
+        await db.calendar.bulkAdd([
+            new CalendarDB({
+                Id: 1,
+                Calendar: 202101
+            }),
+            new CalendarDB({
+                Id: 2,
+                Calendar: 202102
+            }),
+            new CalendarDB({
+                Id: 3,
+                Calendar: 202103
+            }),
+            new CalendarDB({
+                Id: 4,
+                Calendar: 202201
+            }),
+            new CalendarDB({
+                Id: 5,
+                Calendar: 202202
+            }),
+            new CalendarDB({
+                Id: 6,
+                Calendar: 202203
+            }),            
+        ]);
+
         await db.report.bulkAdd([
             new ReportDB({
                 Id: 1,
                 PublisherId: 1,
-                Calendar: 202201,
+                CalendarId: 1,
                 TypeId: 1,
                 Publications: 1,
                 Videos: 1,
@@ -193,7 +224,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 2,
                 PublisherId: 1,
-                Calendar: 202202,
+                CalendarId: 5,
                 TypeId: 1,
                 Publications: 2,
                 Videos: 2,
@@ -204,7 +235,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 3,
                 PublisherId: 1,
-                Calendar: 202203,
+                CalendarId: 6,
                 TypeId: 1,
                 Publications: 3,
                 Videos: 3,
@@ -215,7 +246,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 4,
                 PublisherId: 2,
-                Calendar: 202201,
+                CalendarId: 4,
                 TypeId: 1,
                 Publications: 1,
                 Videos: 1,
@@ -226,7 +257,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 5,
                 PublisherId: 2,
-                Calendar: 202202,
+                CalendarId: 2,
                 TypeId: 1,
                 Publications: 2,
                 Videos: 2,
@@ -237,7 +268,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 6,
                 PublisherId: 2,
-                Calendar: 202203,
+                CalendarId: 6,
                 TypeId: 1,
                 Publications: 3,
                 Videos: 3,
@@ -248,7 +279,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 7,
                 PublisherId: 3,
-                Calendar: 202201,
+                CalendarId: 4,
                 TypeId: 1,
                 Publications: 1,
                 Videos: 1,
@@ -259,7 +290,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 8,
                 PublisherId: 3,
-                Calendar: 202202,
+                CalendarId: 5,
                 TypeId: 1,
                 Publications: 2,
                 Videos: 2,
@@ -270,7 +301,7 @@ export class ApplicationDB extends Dexie {
             new ReportDB({
                 Id: 9,
                 PublisherId: 3,
-                Calendar: 202203,
+                CalendarId: 3,
                 TypeId: 1,
                 Publications: 3,
                 Videos: 3,

@@ -1,0 +1,30 @@
+[
+    {
+        "key": 1,
+        "value": "Active"
+    },
+    {
+        "key": 2,
+        "value": "Inactive"
+    },
+    {
+        "key": 3,
+        "value": "Irregular"
+    },
+    {
+        "key": 4,
+        "value": "It's moved on"
+    },
+    {
+        "key": 5,
+        "value": "Isn't publisher anymore"
+    },
+    {
+        "key": 6,
+        "value": "Deceased"
+    },
+    {
+        "key": 7,
+        "value": "Othes"
+    }
+]

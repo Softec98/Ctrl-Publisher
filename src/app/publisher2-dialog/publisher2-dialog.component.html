@@ -407,17 +407,19 @@
 
                     <div fxFlex="33%">
                         <app-legal-representative
-                            listaExclusao="{{ this.form.value.Id }}, {{ this.form.value.LegalRepresentative2Id ?? 0 }}"
+                            listaExclusao="{{ this.listaExclusao1 }}"
                             label="{{'PUBLISHER.LEGALREPRESENTATIVE1ID' | translate}}"
-                            formControlName="LegalRepresentative1Id">
+                            formControlName="LegalRepresentative1Id"
+                            (ngModelChange)="aoSairDoProcurado(1, $event)">
                         </app-legal-representative>
                     </div>
 
                     <div fxFlex="33%">
                         <app-legal-representative
-                            listaExclusao="{{ this.form.value.Id }}, {{ this.form.value.LegalRepresentative1Id ?? 0 }}"
+                            listaExclusao="{{ this.listaExclusao2 }}"
                             label="{{'PUBLISHER.LEGALREPRESENTATIVE2ID' | translate}}"
-                            formControlName="LegalRepresentative2Id">
+                            formControlName="LegalRepresentative2Id"
+                            (ngModelChange)="aoSairDoProcurado(2, $event)">
                         </app-legal-representative>
                     </div>
 

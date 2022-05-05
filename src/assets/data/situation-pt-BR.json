@@ -1,0 +1,30 @@
+[
+    {
+        "key": 1,
+        "value": "Ativo"
+    },
+    {
+        "key": 2,
+        "value": "Inativo"
+    },
+    {
+        "key": 3,
+        "value": "Irregular"
+    },
+    {
+        "key": 4,
+        "value": "Mudou-se"
+    },
+    {
+        "key": 5,
+        "value": "Não é mais publicador"
+    },
+    {
+        "key": 6,
+        "value": "Falecido"
+    },
+    {
+        "key": 7,
+        "value": "Outros"
+    }
+]

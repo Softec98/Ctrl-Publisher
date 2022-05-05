@@ -8,7 +8,7 @@
       "THEME": "Publisher",
       "NAME": "Publisher Name",
       "BAPTISMDATE": "Batism Date (years)",
-      "BIRTHDATE": "Birth Date (years)",
+      "BIRTHDATE": "Birth Date (age)",
       "AGE": "Age",
       "GENDER": "Gender",
       "ZIPCODE": "ZIP Code",
@@ -49,9 +49,10 @@
       "DELETE": "Delete",
       "CANCEL": "Cancel",
       "SAVE": "Save",
-      "LOGIN": "To Login to",
+      "LOGIN": "To login to",
       "ACTIONS": "Actions",
-      "FILTER": "Filter"
+      "FILTER": "Filter",
+      "SELECT": "Select"
     },
     "REGISTER": {
       "PUBLISHER": "Publisher register",
@@ -59,6 +60,17 @@
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Items per page",
-      "OF_LABEL": "of"
+      "OF_LABEL": "of",
+      "NEXT_PAGE": "Next",
+      "PREVIOUS_PAGE": "Previous"      
+    },
+    "REPORT": {
+      "TYPE": "Type",
+      "VIDEOS": "Videos",
+      "PUBLICATIONS": "Publications",
+      "REVISITS": "Revisits",
+      "STUDIES": "Studies",
+      "HOURS": "Hours",
+      "YEAR": "Year"
     }
 }

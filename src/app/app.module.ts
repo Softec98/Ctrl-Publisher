@@ -30,7 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CustomMatPaginatorIntlService } from './Services/custom-mat-paginator-intl.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
+  return new TranslateHttpLoader(httpClient)
 }
 
 import {
@@ -55,6 +55,8 @@ import { SelectOnFocusDirective } from './Directives/select-on-focus.directive';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LegalRepresentativeComponent } from './legal-representative/legal-representative.component';
 import { ReportListComponent } from './report-list/report-list.component';
+import { ReportGridComponent } from './report-grid/report-grid.component';
+import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 
 let _dateInput: string = environment.dateInput;
 
@@ -88,7 +90,9 @@ export const MY_FORMATS = {
     TelefonePipe,
     SelectOnFocusDirective,
     LegalRepresentativeComponent,
-    ReportListComponent
+    ReportListComponent,
+    ReportGridComponent,
+    ReportDialogComponent
   ],
   imports: [
     MatDatepickerModule,
