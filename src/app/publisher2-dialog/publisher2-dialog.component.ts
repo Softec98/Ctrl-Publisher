@@ -58,7 +58,7 @@ export class Publisher2DialogComponent implements OnInit {
     const promise4 = this.dataService.getMaritalStatus();
     const promise5 = this.dataService.getGenders();
     const promise6 = this.dataService.getStates();
-    const promises = [promise1, promise2, promise3, promise4, promise5, promise6] 
+    const promises = [promise1, promise2, promise3, promise4, promise5, promise6]
     Promise.allSettled(promises).
       then((results) => results.forEach((result) => console.log(result.status))).
       finally(() => this.atualizarSeletores());

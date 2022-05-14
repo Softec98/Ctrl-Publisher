@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <title>Publisher Control</title>
@@ -9,8 +10,20 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    @media print {
+      @page {
+        /* size: 210mm 297mm; 80% */ 
+        size: 168mm 237mm;
+        margin: 0;
+        margin-right: 0;
+      }
+    }
+  </style>
 </head>
+
 <body class="mat-typography">
   <app-root></app-root>
 </body>
+
 </html>

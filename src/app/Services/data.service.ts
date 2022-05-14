@@ -40,7 +40,6 @@ export class DataService {
   types: IAuxiliar[] = [];
 
   getBrowserLang() {
-
     const browserLang = this.translateService.getBrowserLang();
     return browserLang?.match(/pt-BR|en/) ? browserLang : this.defaultLang;
   }
@@ -60,6 +59,41 @@ export class DataService {
 
   async getCalendars() {
     return await db.calendar.orderBy('Calendar').reverse().toArray();
+  }
+
+  async deleteCalendar(id: number) {
+    await db.transaction('rw', db.report, db.calendar, function () {
+      db.report.orderBy('CalendarId').filter(x => x.CalendarId == id).keys().then((reportIds) => {
+        if (reportIds && reportIds.length > 0) {
+          let newIds: number[] = [];
+          reportIds.forEach(x => newIds.push(Number(x.toString())));
+          db.report.bulkDelete(newIds);
+        }
+      });
+      db.calendar.delete(id);
+    }).catch(function (err) {
+      console.error(err.stack || err);
+    });
+
+    this.calendars = [];
+  }
+
+  async getCalendar(id: number) {
+    return await db.calendar.get(id);
+  }
+
+  async getLastCalendar(): Promise<number> {
+    return await db.calendar.orderBy('Id').last().then(calendar => {
+      return calendar?.Id ?? 0;
+    });
+  }
+
+  async addCalendar(data: CalendarDB) {
+    await db.transaction('rw', db.calendar, function () {
+      db.calendar.add(data);
+    }).catch(function (err) {
+      console.error(err.stack || err);
+    });
   }
 
   async getPublishers() {
@@ -250,9 +284,6 @@ export class DataService {
 
   async getMonthsOfYear(ano: number) {
 
-    var compets = this.calendars.filter(x => x.Calendar.toString().startsWith(ano.toString()))
-      .map(function (calendar) { return calendar.Id; });
-
     const summary = new Map<number, {
       index: number,
       compet: number,
@@ -266,10 +297,33 @@ export class DataService {
 
     let indice = -1;
 
+    var compets = this.calendars.filter(x => x.Calendar.toString().startsWith(ano.toString()))
+      .map(function (calendar) { 
+        if (!summary.has(calendar.Calendar)) {
+          let mes = Number(calendar.Calendar.toString().substring(4)) -1;
+          let ano = Number(calendar.Calendar.toString().substring(0, 4));
+          indice++;
+          summary.set(calendar.Calendar,
+            {
+              index: indice,
+              compet: calendar.Calendar,
+              month: new Date(ano, mes, 1).toLocaleString('default', { month: 'long' }),
+              year: ano,
+              amountHours: 0,
+              publishers: 0,
+              aux_pioneer: 0,
+              reg_pioneer: 0
+            })          
+        }
+        return calendar.Id; 
+      });
+
+    indice++;
+
     return await db.report //.orderBy('Id').reverse()
       .filter(x => compets.includes(x.CalendarId)).each(report => {
         let compet: number = this.getCalendarCompet(report.CalendarId);
-        let mes = Number(compet.toString().substring(4)) - 1;
+        let mes = Number(compet.toString().substring(4)) -1;
         let ano = Number(compet.toString().substring(0, 4));
         if (summary.has(compet)) {
           summary.get(compet)!.amountHours += report.Hours;
@@ -418,9 +472,13 @@ export class DataService {
     }
   }
 
-  getMaritalStatusById(id: number) {
-    this.getMaritalStatus();
-    return this.maritalStatus.find(x => x.key == id)?.value!;
+  async getMaritalStatusById(id: number, gender: string = 'M') {
+    await this.getMaritalStatus();
+    let maritalStatus:string = this.maritalStatus.find(x => x.key == id)?.value!;
+    if (this.lang.startsWith('pt')) {
+      maritalStatus = `${maritalStatus.substring(0, maritalStatus.length - 1)}${(gender == 'M' ? 'o' : 'a')}`;
+    }
+    return maritalStatus;
   }
 
   async getGenders(): Promise<void> {

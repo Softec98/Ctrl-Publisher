@@ -52,7 +52,12 @@
       "LOGIN": "Logar-se para",
       "ACTIONS": "Ações",
       "FILTER": "Filtro",
-      "SELECT": "Selecione"
+      "SELECT": "Selecione",
+      "SHOW": "Mostrar",
+      "HIDE": "Ocultar",
+      "PRINT": "Imprimir",
+      "DOWNLOAD": "Fazer download",
+      "BACK": "Retornar"
     },
     "REGISTER": {
       "PUBLISHER": "Cadastro de Publicador",
@@ -72,5 +77,9 @@
       "STUDIES": "Estudos",
       "HOURS": "Horas",
       "YEAR": "Ano"
+    },
+    "CALENDAR": {
+      "THEME": "Competência",
+      "CALENDAR": "Mês and ano"
     }
 }

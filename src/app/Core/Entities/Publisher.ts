@@ -2,6 +2,7 @@ import { PublisherDB } from "./PublisherDB";
 import { Utils } from "../Utils/Utils";
 import { IPublisher } from "../Interfaces/IPublisher";
 import { IAuxiliar } from "../Interfaces/IAuxiliar";
+import { ILegalRepresentative } from "../Interfaces/ILegalRepresentative";
 
 export class Publisher extends PublisherDB implements IPublisher {
 
@@ -9,8 +10,11 @@ export class Publisher extends PublisherDB implements IPublisher {
   public BirthAge!: number;
   public BaptismAge!: number;
   public Assignment!: string;
-
+  public MaritalStatus!: string;
+  public LegalRepresentative: ILegalRepresentative[] = [];
+  public RemarkInLines: string[] = [];
   public assignments: IAuxiliar[] = [];
+  public action!: string;
 
   log() {
     console.log(JSON.stringify(this));

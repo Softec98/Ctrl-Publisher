@@ -406,20 +406,16 @@
                 <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
                     <div fxFlex="33%">
-                        <app-legal-representative
-                            listaExclusao="{{ this.listaExclusao1 }}"
+                        <app-legal-representative listaExclusao="{{ this.listaExclusao1 }}"
                             label="{{'PUBLISHER.LEGALREPRESENTATIVE1ID' | translate}}"
-                            formControlName="LegalRepresentative1Id"
-                            (ngModelChange)="aoSairDoProcurado(1, $event)">
+                            formControlName="LegalRepresentative1Id" (ngModelChange)="aoSairDoProcurado(1, $event)">
                         </app-legal-representative>
                     </div>
 
                     <div fxFlex="33%">
-                        <app-legal-representative
-                            listaExclusao="{{ this.listaExclusao2 }}"
+                        <app-legal-representative listaExclusao="{{ this.listaExclusao2 }}"
                             label="{{'PUBLISHER.LEGALREPRESENTATIVE2ID' | translate}}"
-                            formControlName="LegalRepresentative2Id"
-                            (ngModelChange)="aoSairDoProcurado(2, $event)">
+                            formControlName="LegalRepresentative2Id" (ngModelChange)="aoSairDoProcurado(2, $event)">
                         </app-legal-representative>
                     </div>
 
@@ -442,6 +438,7 @@
         <button style="margin-left: 8px" mat-raised-button color="primary" (click)="adicionarPublicador()"
             [disabled]="form.invalid">{{ actionBtn }}</button>
     </div>
+
 </form>
 
 <!-- <pre>{{ form.value | json }}</pre> -->

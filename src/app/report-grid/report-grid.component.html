@@ -1,60 +1,78 @@
 <mat-card class="card">
     <mat-card-content>
+
         <div style="margin-top: 10px">
 
-            <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+            <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                <div fxFlex="80%">
+                <div fxFlex="80%" fxLayout="column" fxLayoutAlign="center"> 
+                
                     <mat-form-field appearance="standard">
                         <mat-label>{{ 'BUTTONS.FILTER' | translate }}</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Maria" #input>
                     </mat-form-field>
+                
                 </div>
 
-                <div fxFlex="20%" style="text-align: right">
+                <div fxLayout="column" fxLayoutAlign="center">
+                    
                     <button button="button" mat-raised-button color="primary" (click)="openReport()">
                         <mat-icon>add</mat-icon> {{'BUTTONS.ADD' | translate}} {{'PUBLISHER.REPORT' | translate}}
-                      </button>
+                    </button>
+                
                 </div>
+
             </div>
 
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
 
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.NAME' | translate}}</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'PUBLISHER.NAME' |
+                            translate}}</th>
                         <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="type">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.TYPE' | translate}}
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                            {{'REPORT.TYPE' |
+                            translate}}
                         </th>
-                        <td mat-cell *matCellDef="let row"> {{ row.type }} </td>
+                        <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{ row.type }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="videos">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.VIDEOS' | translate}}</th>
-                        <td mat-cell *matCellDef="let row"> {{ row.videos }} </td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                            {{'REPORT.VIDEOS' |
+                            translate}}</th>
+                        <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{ row.videos }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="publications">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.PUBLICATIONS' | translate}}
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                            {{'REPORT.PUBLICATIONS' | translate}}
                         </th>
-                        <td mat-cell *matCellDef="let row"> {{ row.publications }} </td>
+                        <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{ row.publications }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="revisits">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.REVISITS' | translate}}</th>
-                        <td mat-cell *matCellDef="let row"> {{row.revisits}} </td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                            {{'REPORT.REVISITS' |
+                            translate}}</th>
+                        <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{row.revisits}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="studies">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.STUDIES' | translate}}</th>
-                        <td mat-cell *matCellDef="let row"> {{row.studies}} </td>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>
+                            {{'REPORT.STUDIES' |
+                            translate}}</th>
+                        <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{row.studies}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="hours">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'REPORT.HOURS' | translate}}</th>
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">
+                            {{'REPORT.HOURS' |
+                            translate}}</th>
                         <td mat-cell *matCellDef="let row"> {{row.hours}} </td>
                     </ng-container>
 
@@ -78,8 +96,10 @@
                     </tr>
                 </table>
 
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+                </mat-paginator>
             </div>
+
         </div>
     </mat-card-content>
 </mat-card>

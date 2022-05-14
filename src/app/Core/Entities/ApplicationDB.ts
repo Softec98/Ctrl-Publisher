@@ -14,7 +14,7 @@ export class ApplicationDB extends Dexie {
 
         this.version(1).stores({
             publisher: "++Id, Name, NationalId, Gender, AssignmentId, GroupId, SituationId", // baptismDate, birthDate, isAnointed, assignmentId, isRegularPioneer, groupId, situationId, gender, zipCode, address, complement, number, suburb, city, state, areaCode, phoneNumber, cellPhone, email, remark, sequenceNumber, generalId, nationalId, ocupation, maritalStatusId, isLegalRepresentative, nationality, witness1Name, witness1GeneralId, witness2Name, witness2GeneralId, legalRepresentative1Id, legalRepresentative2Id, fillDate
-            report: "++Id, PublisherId, Calendar, TypeId", // Publications, Videos, Hours, Revisits, Studies
+            report: "++Id, PublisherId, CalendarId, TypeId", // Publications, Videos, Hours, Revisits, Studies
             calendar: "++Id, Calendar"
         });
 

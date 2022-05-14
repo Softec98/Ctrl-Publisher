@@ -4,8 +4,37 @@
 
   <div class="container">
 
-    <div style="text-align: center; margin-top: 10px">
-      <div [formGroup]="formAno">
+    <!-- <div style="display: flex; justify-content:center; align-items:center;">
+
+      <div fxLayoutGap="10px" fxLayoutGap.xs="2px" style="width: 50%;">
+
+        <div fxFlex="50%" [formGroup]="formAno">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'BUTTONS.SELECT' | translate}} {{'REPORT.YEAR' | translate}}</mat-label>
+            <mat-select matInput placeholder="{{'REPORT.YEAR' | translate}}" formControlName="Ano"
+              (ngModelChange)="aoMudarAno($event)">
+              <mat-option value="-1">[{{'BUTTONS.SELECT' | translate}} {{'REPORT.YEAR' | translate}}]</mat-option>
+              <mat-option *ngFor="let ano of anos" [value]="ano.year">
+                {{ ano.year }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50%">
+          <button button="button" mat-raised-button color="primary" (click)="gerirCalendar()"
+            style="align-self:baseline; margin-left: 10px">
+            <mat-icon>add</mat-icon> {{'BUTTONS.SHOW' | translate}} {{'CALENDAR.THEME' | translate}}
+          </button>
+        </div>
+
+      </div>
+    </div> -->
+
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+      <div fxLayout="column" fxLayoutAlign="center" [formGroup]="formAno">
+
         <mat-form-field appearance="outline">
           <mat-label>{{'BUTTONS.SELECT' | translate}} {{'REPORT.YEAR' | translate}}</mat-label>
           <mat-select matInput placeholder="{{'REPORT.YEAR' | translate}}" formControlName="Ano"
@@ -16,11 +45,27 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+
       </div>
+
+      <div fxLayout="column" fxLayoutAlign="center">
+
+        <button button="button" mat-raised-button color="primary" (click)="gerirCalendar()"
+          style="vertical-align: top">
+          <mat-icon>add</mat-icon> {{'BUTTONS.SHOW' | translate}} {{'CALENDAR.THEME' | translate}}
+        </button>
+
+      </div>
+
     </div>
 
-    <mat-accordion class="example-headers-align" *ngFor="let compet of compets">
+    <br>
 
+    <app-calendar-grid *ngIf="this.mostrarCalendar" style="display: flex; justify-content:center; align-items:center;">
+    </app-calendar-grid>
+
+    <mat-accordion class="example-headers-align" *ngFor="let compet of compets">
+      <br *ngIf="! (isHandset$ | async)">
       <mat-expansion-panel [expanded]="expandir && compet.index == step" (opened)="setStep(compet.index)" hideToggle>
 
         <mat-expansion-panel-header>
@@ -29,10 +74,15 @@
             {{ compet.month | titlecase }}/{{ compet.year }}
           </mat-panel-title>
 
-          <mat-panel-description>
-            Publicadores: {{ compet.publishers ?? 0 }} | 
-            Pion. aux: {{ compet.aux_pioneers ?? 0 }} | 
-            Pion. reg: {{ compet.reg_pioneers ?? 0 }} | 
+          <mat-panel-description *ngIf="isHandset$ | async">
+            Horas: {{ compet.amountHours }}
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+''
+          <mat-panel-description *ngIf="! (isHandset$ | async)">
+            Publicadores: {{ compet.publishers ?? 0 }} |
+            Pion. aux: {{ compet.aux_pioneers ?? 0 }} |
+            Pion. reg: {{ compet.reg_pioneers ?? 0 }} |
             Total horas: {{ compet.amountHours }}
             <mat-icon>date_range</mat-icon>
           </mat-panel-description>

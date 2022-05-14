@@ -52,11 +52,16 @@
       "LOGIN": "To login to",
       "ACTIONS": "Actions",
       "FILTER": "Filter",
-      "SELECT": "Select"
+      "SELECT": "Select",
+      "SHOW": "Show",
+      "HIDE": "Hide",
+      "PRINT": "Print",
+      "DOWNLOAD": "Download",
+      "BACK": "Go back"
     },
     "REGISTER": {
       "PUBLISHER": "Publisher register",
-      "MEDICAL": "Medical directives"
+      "MEDICAL": "Health directives"
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Items per page",
@@ -72,5 +77,9 @@
       "STUDIES": "Studies",
       "HOURS": "Hours",
       "YEAR": "Year"
+    },
+    "CALENDAR": {
+      "THEME": "Calendar",
+      "CALENDAR": "Month and year"
     }
 }

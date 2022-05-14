@@ -1,0 +1,54 @@
+<mat-card class="card" style="width: 50%;">
+    <mat-card-content>
+
+        <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+            <div fxFlex="50%">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'CALENDAR.CALENDAR' | translate}}</mat-label>
+                    <input matInput [matDatepicker]="dp" [formControl]="date">
+                    <mat-hint>MM/AAAA</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
+                        panelClass="example-month-picker">
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="50%">
+                <button button="button" mat-raised-button color="primary" (click)="adicionarCalendar()">
+                    <mat-icon>add</mat-icon> {{'BUTTONS.ADD' | translate}} {{'CALENDAR.THEME' | translate}}
+                </button>
+            </div>
+
+        </div>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="calendar">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'CALENDAR.THEME' | translate}}
+                    </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.Calendar | calendar | titlecase }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acoes">
+                    <th mat-header-cell *matHeaderCellDef>{{'BUTTONS.ACTIONS' | translate}}</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button (click)="deleteCalendar(row.Id, row['Calendar'])" mat-icon-button color="warn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+            </mat-paginator>
+        </div>
+
+    </mat-card-content>
+</mat-card>

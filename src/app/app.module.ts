@@ -57,6 +57,11 @@ import { LegalRepresentativeComponent } from './legal-representative/legal-repre
 import { ReportListComponent } from './report-list/report-list.component';
 import { ReportGridComponent } from './report-grid/report-grid.component';
 import { ReportDialogComponent } from './report-dialog/report-dialog.component';
+import { CalendarGridComponent } from './calendar-grid/calendar-grid.component';
+import { CalendarPipe } from './Pipes/calendar.pipe';
+import { DiretivaFrenteComponent } from './diretiva-frente/diretiva-frente.component';
+import { DiretivaVersoComponent } from './diretiva-verso/diretiva-verso.component';
+import { RgPipe } from './Pipes/rg.pipe';
 
 let _dateInput: string = environment.dateInput;
 
@@ -92,7 +97,12 @@ export const MY_FORMATS = {
     LegalRepresentativeComponent,
     ReportListComponent,
     ReportGridComponent,
-    ReportDialogComponent
+    ReportDialogComponent,
+    CalendarGridComponent,
+    CalendarPipe,
+    DiretivaFrenteComponent,
+    DiretivaVersoComponent,
+    RgPipe
   ],
   imports: [
     MatDatepickerModule,
