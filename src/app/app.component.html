@@ -37,12 +37,12 @@
       </div>
       <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-          <li>
+          <!-- <li>
             <a *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
               <mat-icon class="icon">input</mat-icon>
               <span class="label">Login</span>
             </a>
-          </li>
+          </li> -->
           <li>
             <a *ngIf="auth.isAuthenticated()" routerLink="/">
               <mat-icon class="icon">home</mat-icon>

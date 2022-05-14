@@ -120,12 +120,12 @@ export class Dashboard2Component implements OnInit {
       }
 
       if (action == 'download') {
-        const promise1 =this.dialog.open(DiretivaFrenteComponent, { data: publisher });
+        const promise1 = this.dialog.open(DiretivaFrenteComponent, { data: publisher });
         const promise2 = this.dialog.open(DiretivaVersoComponent, { data: publisher });
         const promises = [promise1, promise2]
         Promise.allSettled(promises).
           then((results) => results.forEach((result) => console.log(result.status))).
-          finally(() => console.log('baixou 2 arquivos, frente e verso...'));        
+          finally(() => console.log('baixou 2 arquivos, frente e verso...'));
       }
       else {
         if (confirm(`Deseja ver a frente do documento?`)) {

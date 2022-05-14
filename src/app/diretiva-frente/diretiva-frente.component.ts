@@ -1,7 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+
+declare var require: any;
+
+import * as pdfMake from "node_modules/pdfmake/build/pdfmake.js";
+import * as pdfFonts from "node_modules/pdfmake/build/vfs_fonts.js";
+const htmlToPdfmake = require("html-to-pdfmake");
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-diretiva-frente',
@@ -10,6 +17,9 @@ import html2canvas from 'html2canvas';
 })
 export class DiretivaFrenteComponent implements OnInit {
 
+  @ViewChild('frente')
+  frente!: ElementRef;
+
   constructor(public dialogRef: MatDialogRef<DiretivaFrenteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -17,12 +27,13 @@ export class DiretivaFrenteComponent implements OnInit {
 
   ngAfterViewInit() {
     if (this.data.action == 'download') {
-      this.downloadDiretiva('frente');
+      this.download_html2canvas('frente');
+      //this.download_pdfMake();
       this.dialogRef.close();
     }
   }
 
-  downloadDiretiva(tipo: string): void {
+  download_html2canvas(tipo: string): void {
     let DATA: any = document.getElementById(tipo);
     html2canvas(DATA, { scale: 1.5 }).then((canvas) => {
       let fileWidth = 208;
@@ -35,5 +46,12 @@ export class DiretivaFrenteComponent implements OnInit {
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save(`diretiva-${tipo}.pdf`);
     });
+  }
+
+  download_pdfMake(): void {
+    const frente = this.frente.nativeElement;
+    var html = htmlToPdfmake(frente.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).download(); 
   }
 }

@@ -62,6 +62,7 @@ import { CalendarPipe } from './Pipes/calendar.pipe';
 import { DiretivaFrenteComponent } from './diretiva-frente/diretiva-frente.component';
 import { DiretivaVersoComponent } from './diretiva-verso/diretiva-verso.component';
 import { RgPipe } from './Pipes/rg.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 let _dateInput: string = environment.dateInput;
 
@@ -127,7 +128,13 @@ export const MY_FORMATS = {
     }),
     MatSortModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   entryComponents: [
     PublisherDialogComponent

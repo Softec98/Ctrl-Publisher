@@ -6,18 +6,19 @@
 
     <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center" class="content">
 
-      <div class="blocks" *ngIf="auth.isAuthenticated()">
+      <div class="blocks">
+        <!-- *ngIf="auth.isAuthenticated()" -->
         <button button="button" mat-raised-button color="primary" (click)="openDialog2()">
           <mat-icon>add</mat-icon> {{'BUTTONS.ADD' | translate}} {{'PUBLISHER.THEME' | translate}}
         </button>
       </div>
 
-      <div class="blocks" *ngIf="!auth.isAuthenticated()">
+      <!-- <div class="blocks" *ngIf="!auth.isAuthenticated()">
         <a button mat-raised-button color="primary" (click)="auth.login()">
           <mat-icon>input</mat-icon>{{'BUTTONS.LOGIN' | translate }} {{'BUTTONS.ADD' | translate | lowercase }}
           {{'PUBLISHER.THEME' | translate | lowercase}}
         </a>
-      </div>
+      </div> -->
 
     </div>
 
@@ -97,7 +98,8 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                 <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  <td class="mat-cell" colspan="4" *ngIf="input.value">Nenhum publicador encontrado com o filtro: "{{input.value}}"</td>
+                  <td class="mat-cell" colspan="4" *ngIf="!(input.value)">Nenhum publicador cadastrado</td>
                 </tr>
               </table>
 
