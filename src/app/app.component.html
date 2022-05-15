@@ -1,11 +1,12 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <mat-nav-list>
-      <a mat-list-item *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
+      <!-- <a mat-list-item *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
         <mat-icon class="icon">input</mat-icon>
         <span class="label">Login</span>
-      </a>
-      <a mat-list-item *ngIf="auth.isAuthenticated()" routerLink="/">
+      </a> -->
+      <a mat-list-item routerLink="/">
+        <!-- *ngIf="auth.isAuthenticated()" -->
         <mat-icon class="icon">home</mat-icon>
         <span class="label">Home</span>
       </a>
@@ -32,7 +33,8 @@
       </div>
       <div>
         <a routerLink="/">
-          Sistema de Publicadores
+          <!-- <mat-icon class="icon">home</mat-icon> -->
+          <span class="label">Ctrl Publisher</span>
         </a>
       </div>
       <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
@@ -44,7 +46,8 @@
             </a>
           </li> -->
           <li>
-            <a *ngIf="auth.isAuthenticated()" routerLink="/">
+            <a routerLink="/">
+              <!-- *ngIf="auth.isAuthenticated()" -->
               <mat-icon class="icon">home</mat-icon>
               <span class="label">Home</span>
             </a>

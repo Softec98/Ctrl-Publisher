@@ -1,8 +1,16 @@
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; 
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 // indigo-pink | deeppurple-amber | pink-bluegrey | purple-green
 
 body {
   margin: 0;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
