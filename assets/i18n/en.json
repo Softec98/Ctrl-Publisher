@@ -1,0 +1,85 @@
+{
+    "ERROR": {
+      "INVALID": "Field is Invalid!",
+      "EXISTS": "Publisher exists!"
+    },
+    "PUBLISHER":{
+      "REPORT": "Report",
+      "THEME": "Publisher",
+      "NAME": "Publisher Name",
+      "BAPTISMDATE": "Batism Date (years)",
+      "BIRTHDATE": "Birth Date (age)",
+      "AGE": "Age",
+      "GENDER": "Gender",
+      "ZIPCODE": "ZIP Code",
+      "ADDRESS": "Address",
+      "NUMBER": "Number",
+      "STATE": "State",
+      "CITY": "City",
+      "COMPLEMENT": "Complement",
+      "SUBURB": "Suburb",
+      "AREACODE": "Area Code",
+      "PHONENUMBER": "Telephone",
+      "CELLPHONE": "Cell Phone",
+      "EMAIL": "Email",
+      "GROUPID": "Group",
+      "SITUATIONID": "Situation",
+      "MARITALSTATUSID": "Marital Status",
+      "ASSIGNMENTID": "Assignment",
+      "ISANOINTED": "Is Anointed",
+      "ISREGULARPIONEER": "Is Regular Pioneer",
+      "GENERALID": "General Id",
+      "NATIONALID": "National Id",
+      "ISLEGALREPRESENTATIVE": "Is Legal Representative",
+      "NATIONALITY": "Nationality",
+      "OCUPATION": "Ocupation",
+      "REMARK": "Instructions about others health treatments",
+      "WITNESS1NAME": "1st Witness' Name",
+      "WITNESS1GENERALID": "1st Witness' Id",
+      "WITNESS2NAME": "2nd Witness' Name",
+      "WITNESS2GENERALID": "2nd Witness' Id",
+      "LEGALREPRESENTATIVE1ID": "1st Legal Representative",
+      "LEGALREPRESENTATIVE2ID": "2nd Legal Representative",
+      "FILLDATE": "Fill Date"
+    },
+    "BUTTONS": {
+      "ADD": "Add",
+      "EDIT": "Edit",
+      "UPDATE": "Update",
+      "DELETE": "Delete",
+      "CANCEL": "Cancel",
+      "SAVE": "Save",
+      "LOGIN": "To login to",
+      "ACTIONS": "Actions",
+      "FILTER": "Filter",
+      "SELECT": "Select",
+      "SHOW": "Show",
+      "HIDE": "Hide",
+      "PRINT": "Print",
+      "DOWNLOAD": "Download",
+      "BACK": "Go back"
+    },
+    "REGISTER": {
+      "PUBLISHER": "Publisher register",
+      "MEDICAL": "Health directives"
+    },
+    "PAGINATOR": {
+      "ITEMS_PER_PAGE": "Items per page",
+      "OF_LABEL": "of",
+      "NEXT_PAGE": "Next",
+      "PREVIOUS_PAGE": "Previous"      
+    },
+    "REPORT": {
+      "TYPE": "Type",
+      "VIDEOS": "Videos",
+      "PUBLICATIONS": "Publications",
+      "REVISITS": "Revisits",
+      "STUDIES": "Studies",
+      "HOURS": "Hours",
+      "YEAR": "Year"
+    },
+    "CALENDAR": {
+      "THEME": "Calendar",
+      "CALENDAR": "Month and year"
+    }
+}

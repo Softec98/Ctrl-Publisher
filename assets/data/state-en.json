@@ -1,0 +1,257 @@
+[
+    {
+        "key": "AL",
+        "value": "Alabama",
+        "capitalValue": "Montgomery"
+    },
+    {
+        "key": "AK",
+        "value": "Alaska",
+        "capitalValue": "Juneau"
+    },
+    {
+        "key": "AZ",
+        "value": "Arizona",
+        "capitalValue": "Phoenix"
+    },
+    {
+        "key": "AR",
+        "value": "Arkansas",
+        "capitalValue": "Little Rock"
+    },
+    {
+        "key": "CA",
+        "value": "California",
+        "capitalValue": "Sacramento"
+    },
+    {
+        "key": "CO",
+        "value": "Colorado",
+        "capitalValue": "Denver"
+    },
+    {
+        "key": "CT",
+        "value": "Connecticut",
+        "capitalValue": "Hartford"
+    },
+    {
+        "key": "DE",
+        "value": "Delaware",
+        "capitalValue": "Dover"
+    },
+    {
+        "key": "DC",
+        "value": "District of Columbia",
+        "capitalValue": "Washington"
+    },
+    {
+        "key": "FL",
+        "value": "Florida",
+        "capitalValue": "Tallahassee"
+    },
+    {
+        "key": "GA",
+        "value": "Georgia",
+        "capitalValue": "Atlanta"
+    },
+    {
+        "key": "HI",
+        "value": "Hawaii",
+        "capitalValue": "Honolulu"
+    },
+    {
+        "key": "ID",
+        "value": "Idaho",
+        "capitalValue": "Boise"
+    },
+    {
+        "key": "IL",
+        "value": "Illinois",
+        "capitalValue": "Springfield"
+    },
+    {
+        "key": "IN",
+        "value": "Indiana",
+        "capitalValue": "Indianapolis"
+    },
+    {
+        "key": "IA",
+        "value": "Iowa",
+        "capitalValue": "Des Moines"
+    },
+    {
+        "key": "KS",
+        "value": "Kansas",
+        "capitalValue": "Topeka"
+    },
+    {
+        "key": "KY",
+        "value": "Kentucky",
+        "capitalValue": "Frankfort"
+    },
+    {
+        "key": "LA",
+        "value": "Louisiana",
+        "capitalValue": "Baton Rouge"
+    },
+    {
+        "key": "ME",
+        "value": "Maine",
+        "capitalValue": "Augusta"
+    },
+    {
+        "key": "MD",
+        "value": "Maryland",
+        "capitalValue": "Annapolis"
+    },
+    {
+        "key": "MA",
+        "value": "Massachusetts",
+        "capitalValue": "Boston"
+    },
+    {
+        "key": "MI",
+        "value": "Michigan",
+        "capitalValue": "Lansing"
+    },
+    {
+        "key": "MN",
+        "value": "Minnesota",
+        "capitalValue": "Saint Paul"
+    },
+    {
+        "key": "MS",
+        "value": "Mississippi",
+        "capitalValue": "Jackson"
+    },
+    {
+        "key": "MO",
+        "value": "Missouri",
+        "capitalValue": "Jefferson City"
+    },
+    {
+        "key": "MT",
+        "value": "Montana",
+        "capitalValue": "Helena"
+    },
+    {
+        "key": "NE",
+        "value": "Nebraska",
+        "capitalValue": "Lincoln"
+    },
+    {
+        "key": "NV",
+        "value": "Nevada",
+        "capitalValue": "Carson City"
+    },
+    {
+        "key": "NH",
+        "value": "New Hampshire",
+        "capitalValue": "Concord"
+    },
+    {
+        "key": "NJ",
+        "value": "New Jersey",
+        "capitalValue": "Trenton"
+    },
+    {
+        "key": "NM",
+        "value": "New Mexico",
+        "capitalValue": "Santa Fe"
+    },
+    {
+        "key": "NY",
+        "value": "New York",
+        "capitalValue": "Albany"
+    },
+    {
+        "key": "NC",
+        "value": "North Carolina",
+        "capitalValue": "Raleigh"
+    },
+    {
+        "key": "ND",
+        "value": "North Dakota",
+        "capitalValue": "Bismarck"
+    },
+    {
+        "key": "OH",
+        "value": "Ohio",
+        "capitalValue": "Columbus"
+    },
+    {
+        "key": "OK",
+        "value": "Oklahoma",
+        "capitalValue": "Oklahoma City"
+    },
+    {
+        "key": "OR",
+        "value": "Oregon",
+        "capitalValue": "Salem"
+    },
+    {
+        "key": "PA",
+        "value": "Pennsylvania",
+        "capitalValue": "Harrisburg"
+    },
+    {
+        "key": "RI",
+        "value": "Rhode Island",
+        "capitalValue": "Providence"
+    },
+    {
+        "key": "SC",
+        "value": "South Carolina",
+        "capitalValue": "Columbia"
+    },
+    {
+        "key": "SD",
+        "value": "South Dakota",
+        "capitalValue": "Pierre"
+    },
+    {
+        "key": "TN",
+        "value": "Tennessee",
+        "capitalValue": "Nashville"
+    },
+    {
+        "key": "TX",
+        "value": "Texas",
+        "capitalValue": "Austin"
+    },
+    {
+        "key": "UT",
+        "value": "Utah",
+        "capitalValue": "Salt Lake City"
+    },
+    {
+        "key": "VT",
+        "value": "Vermont",
+        "capitalValue": "Montpelier"
+    },
+    {
+        "key": "VA",
+        "value": "Virginia",
+        "capitalValue": "Richmond"
+    },
+    {
+        "key": "WA",
+        "value": "Washington",
+        "capitalValue": "Olympia"
+    },
+    {
+        "key": "WV",
+        "value": "West Virginia",
+        "capitalValue": "Charleston"
+    },
+    {
+        "key": "WI",
+        "value": "Wisconsin",
+        "capitalValue": "Madison"
+    },
+    {
+        "key": "WY",
+        "value": "Wyoming",
+        "capitalValue": "Cheyenne"
+    }
+]
