@@ -82,7 +82,7 @@ export class Utils {
     }
 
     static async getAuxiliar(arquivo: string) {
-        return await fetch(`../../assets/data/${arquivo}.json`).then(res => res.json())
+        return await fetch(`./assets/data/${arquivo}.json`).then(res => res.json())
             .then(data => {
                 return data as IAuxiliar[];
             });

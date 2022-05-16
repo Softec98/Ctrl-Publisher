@@ -43,7 +43,9 @@ export class ReportGridComponent implements OnInit {
     if (this.calendar !== '') {
       let reports = await this.dataService.getReportsByCalendar(Number(this.calendar));
       this.dataSource = new MatTableDataSource(reports);
-      this.dataSource.paginator = this.paginator;
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      }, 0);
       this.dataSource.sort = this.sort;
       this.registros = await this.dataService.getLastReport() + 1;
     }

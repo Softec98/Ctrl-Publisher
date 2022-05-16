@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // NoopAnimationsModule
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { PublisherDialogComponent } from './publisher-dialog/publisher-dialog.component';
 import { Publisher2DialogComponent } from './publisher2-dialog/publisher2-dialog.component';
@@ -30,7 +31,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CustomMatPaginatorIntlService } from './Services/custom-mat-paginator-intl.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient)
+  return new TranslateHttpLoader(httpClient, './assets/i18n/')
 }
 
 import {
@@ -63,10 +64,15 @@ import { DiretivaFrenteComponent } from './diretiva-frente/diretiva-frente.compo
 import { DiretivaVersoComponent } from './diretiva-verso/diretiva-verso.component';
 import { RgPipe } from './Pipes/rg.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.component';
+import { PromptComponent } from './prompt/prompt.component';
+import { PwaService } from './Services/pwa.service';
 
-let _dateInput: string = environment.dateInput;
+const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
-let _dateLocale: string = environment.dateLocale;
+const _dateInput: string = environment.dateInput;
+
+const _dateLocale: string = environment.dateLocale;
 
 export const MY_FORMATS = {
   parse: {
@@ -103,7 +109,9 @@ export const MY_FORMATS = {
     CalendarPipe,
     DiretivaFrenteComponent,
     DiretivaVersoComponent,
-    RgPipe
+    RgPipe,
+    SpinnerOverlayComponent,
+    PromptComponent
   ],
   imports: [
     MatDatepickerModule,
@@ -112,7 +120,7 @@ export const MY_FORMATS = {
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
+    //NoopAnimationsModule,
     FlexLayoutModule,
     AppRouters,
     FormsModule,
@@ -134,9 +142,11 @@ export const MY_FORMATS = {
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000' // 'registerImmediately'
-    })
+    }),
+    MatProgressSpinnerModule
   ],
   entryComponents: [
+    PromptComponent,
     PublisherDialogComponent
   ],
   providers: [DataService, AuthService, DatePipe,
@@ -145,10 +155,10 @@ export const MY_FORMATS = {
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
     { provide: MAT_DATE_LOCALE, useValue: _dateLocale },
-    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService }
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntlService },
+    { provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true}
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  
 }

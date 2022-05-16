@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DataService } from '../Services/data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MediaObserver } from '@angular/flex-layout';
-import { Observable  } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { VERSION } from '@angular/material/core';
 
@@ -14,18 +14,17 @@ import { VERSION } from '@angular/material/core';
 
 export class ReportListComponent implements OnInit {
 
-  isHandset$: Observable<boolean> = this.media.asObservable().pipe(
-    map(
-      () =>
-        this.media.isActive('xs') ||
-        this.media.isActive('sm') ||
-        this.media.isActive('lt-md')
-    ),
-    tap(() => this.changeDetectorRef.detectChanges()))
   
+  isHandset$: Observable<boolean> = this.media.asObservable().pipe(
+    map(() =>
+      this.media.isActive('xs') ||
+      this.media.isActive('sm') ||
+      this.media.isActive('lt-md')
+    ), tap(() => this.changeDetectorRef.detectChanges()))
+
   version = VERSION;
 
-  constructor(private dataService: DataService, 
+  constructor(private dataService: DataService,
     private builder: FormBuilder,
     private media: MediaObserver,
     private changeDetectorRef: ChangeDetectorRef) { }

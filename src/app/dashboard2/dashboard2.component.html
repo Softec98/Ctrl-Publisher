@@ -88,7 +88,7 @@
                     <button (click)="openDialogDiretiva(row.Id, 'download')" mat-icon-button color="accent">
                       <mat-icon>download</mat-icon>
                     </button>
-                    <button (click)="openDialogDiretiva(row.Id, 'print')" mat-icon-button color="accent">
+                    <button (click)="openDialogDiretiva(row.Id, 'print')" mat-icon-button color="accent" *ngIf="! (isHandset$ | async)">
                       <mat-icon>remove_red_eye</mat-icon>
                     </button>
                   </td>

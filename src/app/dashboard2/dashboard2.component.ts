@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,6 +12,11 @@ import { Publisher } from '../Core/Entities/Publisher';
 import { DiretivaFrenteComponent } from '../diretiva-frente/diretiva-frente.component';
 import { DiretivaVersoComponent } from '../diretiva-verso/diretiva-verso.component';
 import { ILegalRepresentative } from "../Core/Interfaces/ILegalRepresentative";
+import { SpinnerOverlayService } from '../Services/spinner-overlay-service';
+import { MediaObserver } from '@angular/flex-layout';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { VERSION } from '@angular/material/core';
 
 @Component({
   selector: 'app-dashboard2',
@@ -20,9 +25,21 @@ import { ILegalRepresentative } from "../Core/Interfaces/ILegalRepresentative";
 })
 export class Dashboard2Component implements OnInit {
 
+  isHandset$: Observable<boolean> = this.media.asObservable().pipe(
+    map(() =>
+      this.media.isActive('xs') ||
+      this.media.isActive('sm') ||
+      this.media.isActive('lt-md')
+    ), tap(() => this.changeDetectorRef.detectChanges()))
+
+  version = VERSION;
+
   constructor(private dataService: DataService,
+    private media: MediaObserver,
+    private changeDetectorRef: ChangeDetectorRef,
     public auth: AuthService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private readonly spinner: SpinnerOverlayService) { }
 
   displayedColumns = [
     'name',
@@ -45,10 +62,14 @@ export class Dashboard2Component implements OnInit {
     //let publishers: Publisher[] = [];
     //publishersDB.forEach(publisher => { publishers.push(new Publisher(publisher)); });
 
+    this.isHandset$.subscribe(isHandset => console.log(isHandset));
+
     let publishers = [...await this.dataService.getPublishers()].map(publisher => new Publisher(publisher))
 
     this.dataSource = new MatTableDataSource(publishers);
-    this.dataSource.paginator = this.paginator;
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+    }, 0);
     this.dataSource.sort = this.sort;
     this.registros = publishers.length + 1;
   }
@@ -82,8 +103,13 @@ export class Dashboard2Component implements OnInit {
   }
 
   async openDialogDiretiva(id: number, action: string = 'show'): Promise<void> {
+
     let publisher: any;
+
     if (typeof id !== 'undefined') {
+
+      this.spinner.show();
+
       publisher = new Publisher(await this.dataService.getPublisher(id)!);
       publisher.action = action;
       publisher.MaritalStatus = await this.dataService.getMaritalStatusById(publisher.MaritalStatusId!, publisher.Gender);
@@ -125,7 +151,10 @@ export class Dashboard2Component implements OnInit {
         const promises = [promise1, promise2]
         Promise.allSettled(promises).
           then((results) => results.forEach((result) => console.log(result.status))).
-          finally(() => console.log('baixou 2 arquivos, frente e verso...'));
+          finally(() => {
+            console.log('baixou 2 arquivos, frente e verso...');
+            this.spinner.hide();
+          });
       }
       else {
         if (confirm(`Deseja ver a frente do documento?`)) {
@@ -134,7 +163,9 @@ export class Dashboard2Component implements OnInit {
           let dialogRef = this.dialog.open(DiretivaVersoComponent, { data: publisher });
         }
       }
+      this.spinner.hide();
     }
+
   }
 
   async deletePublisher(id: number) {

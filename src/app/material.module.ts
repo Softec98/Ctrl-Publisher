@@ -17,6 +17,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     MatRadioModule,
     FlexLayoutModule,
     MatExpansionModule,
-    CdkAccordionModule    
+    CdkAccordionModule,
+    MatBottomSheetModule   
   ],
   exports: [
     MatSidenavModule,
@@ -52,7 +54,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     MatNativeDateModule,
     MatRadioModule,
     MatExpansionModule,
-    CdkAccordionModule    
+    CdkAccordionModule,
+    MatBottomSheetModule
   ]
 })
 

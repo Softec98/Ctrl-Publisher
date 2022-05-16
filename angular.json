@@ -43,6 +43,7 @@
           },
           "configurations": {
             "production": {
+              "buildOptimizer": true,
               "serviceWorker": true,
               "budgets": [
                 {

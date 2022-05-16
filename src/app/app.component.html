@@ -5,23 +5,23 @@
         <mat-icon class="icon">input</mat-icon>
         <span class="label">Login</span>
       </a> -->
-      <a mat-list-item routerLink="/">
+      <a mat-list-item routerLink="/" (click)="sidenav.toggle()">
         <!-- *ngIf="auth.isAuthenticated()" -->
         <mat-icon class="icon">home</mat-icon>
         <span class="label">Home</span>
       </a>
-      <a mat-list-item routerLink="/dashboard">
+      <a mat-list-item routerLink="/dashboard" (click)="sidenav.toggle()">
         <mat-icon class="icon">face</mat-icon>
         <span class="label">{{'PUBLISHER.THEME' | translate}}</span>
       </a>
-      <a mat-list-item routerLink="/reports">
+      <a mat-list-item routerLink="/reports" (click)="sidenav.toggle()">
         <mat-icon class="icon">dashboard</mat-icon>
         <span class="label">{{'PUBLISHER.REPORT' | translate}}</span>
       </a>
-      <a mat-list-item *ngIf="auth.isAuthenticated()" (click)="auth.logout()" type="button">
+      <!-- <a mat-list-item *ngIf="auth.isAuthenticated()" (click)="auth.logout()" type="button">
         <mat-icon class="icon">input</mat-icon>
         <span class="label">LogOut</span>
-      </a>
+      </a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
