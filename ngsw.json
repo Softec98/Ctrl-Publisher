@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1652719173304,
+  "timestamp": 1652743382379,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "./358.1edc524329e399f7.js",
         "./favicon.ico",
         "./index.html",
-        "./main.8882059164b748a8.js",
+        "./main.9309969a7190f90d.js",
         "./manifest.webmanifest",
         "./polyfills.fb3be18de6ab2ece.js",
         "./runtime.f04ca93ae5c6d002.js",
@@ -299,9 +299,9 @@
     "./assets/windows11/Wide310x150Logo.scale-200.png": "7d0e3f495294940d6ad92f11a575671831174cd9",
     "./assets/windows11/Wide310x150Logo.scale-400.png": "17ac9ce11b635f5c8589881de1ac56be3a05eb81",
     "./favicon.ico": "8d0ba33defce8c6b15711a73210af79d7cccfa66",
-    "./index.html": "cbc9d3ca9c7066ef23307e7c58eb31034c6f76ea",
-    "./main.8882059164b748a8.js": "d2d9a641179745e95ca0919309d9934be56c9558",
-    "./manifest.webmanifest": "d87c880d4fa806083d2ba462b618f3cd2ec994bd",
+    "./index.html": "630448afe1ae887d178ff909f3b618c7fbe45ca0",
+    "./main.9309969a7190f90d.js": "60847d6a8f57cb86a6ba40c37fc5c608074450fc",
+    "./manifest.webmanifest": "4ed6174740f9832fbaae412ee408c25a8a89346a",
     "./polyfills.fb3be18de6ab2ece.js": "ad79f295baf42e1e06704dec8f413c6ae54fb486",
     "./runtime.f04ca93ae5c6d002.js": "0e7e8aa00396679d2cf514aa212a0eea9b1198cb",
     "./scripts.52f8bc0b28cf7206.js": "ef52fa53369118ea2940ab9a680c6d329ea679ac",
