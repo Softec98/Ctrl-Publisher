@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1652794885865,
+  "timestamp": 1652916557087,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -15,7 +15,7 @@
         "./358.1edc524329e399f7.js",
         "./favicon.ico",
         "./index.html",
-        "./main.05524e9b00239f3b.js",
+        "./main.f72b443e50ec1721.js",
         "./manifest.webmanifest",
         "./polyfills.fb3be18de6ab2ece.js",
         "./runtime.f04ca93ae5c6d002.js",
@@ -189,8 +189,8 @@
     "./assets/data/state-pt-BR.json": "3fca309d0bca909a5928d021f89182fbe716251b",
     "./assets/data/type-en.json": "e98d2fb916e34bd6077a556b4f2fd47321431d52",
     "./assets/data/type-pt-BR.json": "2ebc63778d29b943bd2829d95fb3e3268b0c53e0",
-    "./assets/i18n/en.json": "81c1f2037261d85951f6ad6ab44af8bd7942ca0a",
-    "./assets/i18n/pt-BR.json": "fff6f5d022fc99d71a07dd9b92a3a14df3f0b048",
+    "./assets/i18n/en.json": "0fa5548b45cf03cf232521aaf647905aa17bc5e0",
+    "./assets/i18n/pt-BR.json": "44a4be01a353bd2d3478ac9378347bc081bf4f2a",
     "./assets/images/watchtower.png": "bf9fa0a8243f2badf54d725ed650210ceeba5662",
     "./assets/ios/100.png": "07e98cf3c286de62784a86f174306d5514c0e209",
     "./assets/ios/1024.png": "bdc6dcd8a54a17b7f153032a03f822cd26aa6dd8",
@@ -299,8 +299,8 @@
     "./assets/windows11/Wide310x150Logo.scale-200.png": "7d0e3f495294940d6ad92f11a575671831174cd9",
     "./assets/windows11/Wide310x150Logo.scale-400.png": "17ac9ce11b635f5c8589881de1ac56be3a05eb81",
     "./favicon.ico": "8d0ba33defce8c6b15711a73210af79d7cccfa66",
-    "./index.html": "db7bedecd43c3e58bf4528b7cc4472ef727a7218",
-    "./main.05524e9b00239f3b.js": "8c41531c1e57858d835928a9b09944037b2e4c65",
+    "./index.html": "3bfa88c509ddcee1eda30795c00607330637d1e0",
+    "./main.f72b443e50ec1721.js": "7d02dd9e4a584942d5327662c23cbce6f7c6f903",
     "./manifest.webmanifest": "1b863300edc3932d6a5160083a593922ece5c2ac",
     "./polyfills.fb3be18de6ab2ece.js": "ad79f295baf42e1e06704dec8f413c6ae54fb486",
     "./runtime.f04ca93ae5c6d002.js": "0e7e8aa00396679d2cf514aa212a0eea9b1198cb",

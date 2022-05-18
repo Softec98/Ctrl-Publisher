@@ -61,7 +61,9 @@
     },
     "REGISTER": {
       "PUBLISHER": "Cadastro de Publicador",
-      "MEDICAL": "Diretivas médicas"
+      "MEDICAL": "Diretivas médicas",
+      "FRONT": "Frente",
+      "BACK": "Verso"
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Ítens por página",
@@ -80,6 +82,6 @@
     },
     "CALENDAR": {
       "THEME": "Competência",
-      "CALENDAR": "Mês and ano"
+      "CALENDAR": "Mês e ano"
     }
 }
