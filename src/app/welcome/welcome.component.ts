@@ -11,11 +11,8 @@ export class WelcomeComponent implements OnInit {
   constructor(private swUpdate: SwUpdate) { }
 
   ngOnInit(): void {
-
     if (this.swUpdate.isEnabled) {
-
       this.swUpdate.versionUpdates.subscribe(() => {
-
         if (confirm("Há uma nova versão do aplicativo disponível, deseja baixá-lo?")) {
           window.location.reload();
         }

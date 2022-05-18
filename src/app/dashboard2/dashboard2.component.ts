@@ -17,6 +17,7 @@ import { MediaObserver } from '@angular/flex-layout';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { VERSION } from '@angular/material/core';
+import { DiretivaDialogComponent } from '../diretiva-dialog/diretiva-dialog.component';
 
 @Component({
   selector: 'app-dashboard2',
@@ -145,27 +146,10 @@ export class Dashboard2Component implements OnInit {
         }
       }
 
-      if (action == 'download') {
-        const promise1 = this.dialog.open(DiretivaFrenteComponent, { data: publisher });
-        const promise2 = this.dialog.open(DiretivaVersoComponent, { data: publisher });
-        const promises = [promise1, promise2]
-        Promise.allSettled(promises).
-          then((results) => results.forEach((result) => console.log(result.status))).
-          finally(() => {
-            console.log('baixou 2 arquivos, frente e verso...');
-            this.spinner.hide();
-          });
-      }
-      else {
-        if (confirm(`Deseja ver a frente do documento?`)) {
-          let dialogRef = this.dialog.open(DiretivaFrenteComponent, { data: publisher });
-        } else if (confirm(`Deseja ver o verso do documento?`)) {
-          let dialogRef = this.dialog.open(DiretivaVersoComponent, { data: publisher });
-        }
-      }
+      this.dialog.open(DiretivaDialogComponent, { data: publisher, width: '56%' });
+
       this.spinner.hide();
     }
-
   }
 
   async deletePublisher(id: number) {

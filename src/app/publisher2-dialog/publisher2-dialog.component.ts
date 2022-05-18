@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit, Inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../Services/data.service';
@@ -7,6 +7,10 @@ import { PublisherDB } from '../Core/Entities/PublisherDB';
 import { Utils } from '../Core/Utils/Utils';
 import { environment } from 'src/environments/environment';
 import { IAuxiliar } from '../Core/Interfaces/IAuxiliar';
+import { MediaObserver } from '@angular/flex-layout';
+import { map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { VERSION } from '@angular/material/core';
 
 @Component({
   selector: 'app-publisher2-dialog',
@@ -16,7 +20,16 @@ import { IAuxiliar } from '../Core/Interfaces/IAuxiliar';
 
 export class Publisher2DialogComponent implements OnInit {
 
-  private defaultLang: string = this.dataService.getBrowserLang();
+  isHandset$: Observable<boolean> = this.media.asObservable().pipe(
+    map(() =>
+      this.media.isActive('xs') ||
+      this.media.isActive('sm') ||
+      this.media.isActive('lt-md')
+    ), tap(() => this.changeDetectorRef.detectChanges()))
+
+  version = VERSION;
+
+  defaultLang: string = this.dataService.getBrowserLang();
   private environLang: string = environment.defaultLang;
 
   cpfMask = Utils.cpfMask;
@@ -31,6 +44,9 @@ export class Publisher2DialogComponent implements OnInit {
 
   form!: FormGroup;
   actionBtn: string = this.dataService.getTranslation('SAVE', 'BUTTONS');
+  tab1: string = this.dataService.getTranslation('PUBLISHER', 'REGISTER');
+  tab2: string = this.dataService.getTranslation('MEDICAL', 'REGISTER');
+
   listaExclusao1!: string;
   listaExclusao2!: string;
 
@@ -45,6 +61,8 @@ export class Publisher2DialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dataService: DataService,
     public cepService: CepService,
+    private media: MediaObserver,
+    private changeDetectorRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<Publisher2DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -67,7 +85,7 @@ export class Publisher2DialogComponent implements OnInit {
   private atualizarSeletores() {
     this.assignments = this.dataService.assignments;
     this.groups = this.dataService.groups,
-    this.situations = this.dataService.situations;
+      this.situations = this.dataService.situations;
     this.maritalStatus = this.dataService.maritalStatus;
     this.genders = this.dataService.genders;
     this.states = this.dataService.states;

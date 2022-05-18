@@ -1,0 +1,37 @@
+<mat-tab-group mat-align-tabs="start" dynamicHeight #tabGroup (selectedTabChange)="tabChanged($event)">
+
+    <mat-tab label="{{ 'REGISTER.FRONT' | translate }}">
+
+        <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
+            fxLayoutGap.xs="2px">
+
+            <app-diretiva-frente style="min-height: 400px;"></app-diretiva-frente>
+
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="{{ 'REGISTER.BACK' | translate }}">
+
+        <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
+            fxLayoutGap.xs="2px">
+
+            <app-diretiva-verso style="min-height: 400px;"></app-diretiva-verso>
+
+        </div>
+
+    </mat-tab>
+
+</mat-tab-group>
+
+<div mat-dialog-action [align]="'end'" style="margin-top: 5px">
+    <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon> {{'BUTTONS.CANCEL' | translate}}
+    </button>
+    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="this.print();">
+        <mat-icon>print</mat-icon>{{ 'BUTTONS.PRINT' | translate }}
+    </button>
+    <button style="margin-left: 8px" mat-raised-button color="accent" (click)="this.print('download');">
+        <mat-icon>download</mat-icon>{{ 'BUTTONS.DOWNLOAD' | translate }}
+    </button>
+</div>

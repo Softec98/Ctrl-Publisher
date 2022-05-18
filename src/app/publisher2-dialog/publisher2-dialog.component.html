@@ -2,14 +2,14 @@
 
     <mat-tab-group mat-align-tabs="start" dynamicHeight>
 
-        <mat-tab label="{{ 'REGISTER.PUBLISHER' | translate }}">
+        <mat-tab label="{{ (isHandset$ | async) ? tab1.split(' ')[ this.defaultLang == 'en' ? 0 : 2] : tab1 }}">
 
             <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
                 fxLayoutGap.xs="2px">
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.NATIONALID' | translate}}</mat-label>
@@ -28,7 +28,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.GENERALID' | translate}}</mat-label>
@@ -52,9 +52,9 @@
                     </mat-form-field>
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <span class="label" matPrefix> {{'PUBLISHER.GENDER' | translate}}: </span>
                         <mat-radio-group formControlName="Gender" aria-labelledby="example-radio-group-label"
                             class="radio-group">
@@ -69,7 +69,7 @@
                         </mat-error>
                     </div>
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.MARITALSTATUSID' | translate}}</mat-label>
                             <mat-select matInput placeholder="{{'PUBLISHER.MARITALSTATUSID' | translate}}"
@@ -102,8 +102,8 @@
                     </mat-form-field>
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
-                    <div fxFlex="50%">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <app-date-datepicker label="{{'PUBLISHER.BAPTISMDATE' | translate}}"
                             formControlName="BaptismDate">
                         </app-date-datepicker>
@@ -115,7 +115,7 @@
                         </mat-error>
                     </div>
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <app-date-datepicker label="{{'PUBLISHER.BIRTHDATE' | translate}}" formControlName="BirthDate">
                         </app-date-datepicker>
                         <mat-error *ngFor="let validation of publisher_validation_messages.birthDate">
@@ -127,8 +127,8 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
-                    <div fxFlex="50%">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.ZIPCODE' | translate}}</mat-label>
@@ -141,8 +141,8 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
-                    <div fxFlex="90%">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="90%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.ADDRESS' | translate}}</mat-label>
@@ -150,7 +150,7 @@
                                 maxlength="100">
                         </mat-form-field>
                     </div>
-                    <div fxFlex="160px">
+                    <div fxFlex="160px" fxLayout="column">
                         <mat-form-field appearance="outline" floatLabel="always">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.NUMBER' | translate}}</mat-label>
@@ -160,8 +160,8 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
-                    <div fxFlex="50%">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.COMPLEMENT' | translate}}</mat-label>
@@ -169,7 +169,7 @@
                                 formControlName="Complement" maxlength="30">
                         </mat-form-field>
                     </div>
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.SUBURB' | translate}}</mat-label>
@@ -179,8 +179,8 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="12px" fxLayoutGap.xs="2px">
-                    <div>
+                <div fxLayout.xs="row wrap" fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.STATE' | translate}}</mat-label>
                             <mat-select matInput placeholder="{{'PUBLISHER.STATE' | translate}}"
@@ -192,7 +192,7 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <div fxFlex="80%">
+                    <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.CITY' | translate}}</mat-label>
@@ -202,9 +202,9 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="12%">
+                    <div fxFlex="12%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.AREACODE' | translate}}</mat-label>
@@ -213,7 +213,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="44%">
+                    <div fxFlex="44%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.PHONENUMBER' | translate}}</mat-label>
                             <span matPrefix></span>
@@ -223,7 +223,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="44%">
+                    <div fxFlex="44%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.CELLPHONE' | translate}}</mat-label>
                             <span matPrefix></span>
@@ -234,8 +234,8 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="12px" fxLayoutGap.xs="2px">
-                    <div fxFlex="33%">
+                <div fxLayout.xs="row wrap" fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.ASSIGNMENTID' | translate}}</mat-label>
                             <mat-select matInput placeholder="{{'PUBLISHER.ASSIGNMENTID' | translate}}"
@@ -248,7 +248,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.SITUATIONID' | translate}}</mat-label>
                             <mat-select matInput placeholder="{{'PUBLISHER.SITUATIONID' | translate}}"
@@ -261,7 +261,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.GROUPID' | translate}}</mat-label>
                             <mat-select matInput placeholder="{{'PUBLISHER.GROUPID' | translate}}"
@@ -275,19 +275,19 @@
                     </div>
                 </div>
 
-                <div fxLayoutGap="12px" fxLayoutGap.xs="2px">
-                    <div fxFlex="33%">
+                <div fxLayout.xs="row wrap" fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <input type="checkbox" formControlName="IsAnointed" id="isAnointed" class="form-check-input">
                         <label class="form-check-label" for="isAnointed">{{ 'PUBLISHER.ISANOINTED' | translate
                             }}?</label>
                     </div>
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <input type="checkbox" formControlName="IsRegularPioneer" id="isRegularPioneer"
                             class="form-check-input">
                         <label class="form-check-label" for="isRegularPioneer">{{ 'PUBLISHER.ISREGULARPIONEER' |
                             translate }}?</label>
                     </div>
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <input type="checkbox" formControlName="IsLegalRepresentative" id="isLegalRepresentative"
                             class="form-check-input">
                         <label class="form-check-label" for="isLegalRepresentative">{{
@@ -298,9 +298,9 @@
 
                 <br>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.NATIONALITY' | translate}}</mat-label>
@@ -312,7 +312,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="50%">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <span matPrefix> </span>
                             <mat-label>{{'PUBLISHER.OCUPATION' | translate}}</mat-label>
@@ -327,21 +327,21 @@
 
         </mat-tab>
 
-        <mat-tab label="{{ 'REGISTER.MEDICAL' | translate }}">
+        <mat-tab label="{{ (isHandset$ | async) ? tab2.split(' ')[this.defaultLang == 'en' ? 1 : 0] : tab2 }}">
 
             <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
                 fxLayoutGap.xs="2px">
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="70%">
+                    <div fxFlex="70%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
                             <input matInput formControlName="Name" readonly>
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="30%">
+                    <div fxFlex="30%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.NATIONALID' | translate}}</mat-label>
                             <input matInput formControlName="NationalId" [textMask]="cpfMask" readonly>
@@ -363,9 +363,9 @@
 
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="70%">
+                    <div fxFlex="70%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.WITNESS1NAME' | translate}}</mat-label>
                             <input matInput formControlName="Witness1Name" maxlength="100"
@@ -373,7 +373,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="30%">
+                    <div fxFlex="30%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.WITNESS1GENERALID' | translate}}</mat-label>
                             <input matInput formControlName="Witness1GeneralId" [textMask]="rgMask"
@@ -383,9 +383,9 @@
 
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="70%">
+                    <div fxFlex="70%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.WITNESS2NAME' | translate}}</mat-label>
                             <input matInput formControlName="Witness2Name" maxlength="100"
@@ -393,7 +393,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="30%">
+                    <div fxFlex="30%" fxFlex.xs="100%" fxLayout="column">
                         <mat-form-field appearance="outline">
                             <mat-label>{{'PUBLISHER.WITNESS2GENERALID' | translate}}</mat-label>
                             <input matInput formControlName="Witness2GeneralId" [textMask]="rgMask"
@@ -403,23 +403,23 @@
 
                 </div>
 
-                <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <app-legal-representative listaExclusao="{{ this.listaExclusao1 }}"
                             label="{{'PUBLISHER.LEGALREPRESENTATIVE1ID' | translate}}"
                             formControlName="LegalRepresentative1Id" (ngModelChange)="aoSairDoProcurado(1, $event)">
                         </app-legal-representative>
                     </div>
 
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <app-legal-representative listaExclusao="{{ this.listaExclusao2 }}"
                             label="{{'PUBLISHER.LEGALREPRESENTATIVE2ID' | translate}}"
                             formControlName="LegalRepresentative2Id" (ngModelChange)="aoSairDoProcurado(2, $event)">
                         </app-legal-representative>
                     </div>
 
-                    <div fxFlex="33%">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
                         <app-date-datepicker hoje="true" label="{{'PUBLISHER.FILLDATE' | translate}}"
                             formControlName="FillDate">
                         </app-date-datepicker>
@@ -434,9 +434,13 @@
     </mat-tab-group>
 
     <div mat-dialog-action [align]="'end'">
-        <button mat-raised-button color="warn" mat-dialog-close>{{'BUTTONS.CANCEL' | translate}}</button>
+        <button mat-raised-button color="warn" mat-dialog-close>
+            <mat-icon>cancel</mat-icon>{{'BUTTONS.CANCEL' | translate}}
+        </button>
         <button style="margin-left: 8px" mat-raised-button color="primary" (click)="adicionarPublicador()"
-            [disabled]="form.invalid">{{ actionBtn }}</button>
+            [disabled]="form.invalid">
+            <mat-icon>save</mat-icon>{{ actionBtn }}
+        </button>
     </div>
 
 </form>

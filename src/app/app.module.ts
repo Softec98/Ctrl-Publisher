@@ -67,6 +67,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.component';
 import { PromptComponent } from './prompt/prompt.component';
 import { PwaService } from './Services/pwa.service';
+import { DiretivaDialogComponent } from './diretiva-dialog/diretiva-dialog.component';
 
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
@@ -111,7 +112,8 @@ export const MY_FORMATS = {
     DiretivaVersoComponent,
     RgPipe,
     SpinnerOverlayComponent,
-    PromptComponent
+    PromptComponent,
+    DiretivaDialogComponent
   ],
   imports: [
     MatDatepickerModule,

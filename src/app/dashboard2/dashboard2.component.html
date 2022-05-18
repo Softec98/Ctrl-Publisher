@@ -85,11 +85,8 @@
                     <button (click)="deletePublisher(row.Id)" mat-icon-button color="warn">
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <button (click)="openDialogDiretiva(row.Id, 'download')" mat-icon-button color="accent">
-                      <mat-icon>download</mat-icon>
-                    </button>
-                    <button (click)="openDialogDiretiva(row.Id, 'print')" mat-icon-button color="accent" *ngIf="! (isHandset$ | async)">
-                      <mat-icon>remove_red_eye</mat-icon>
+                    <button (click)="openDialogDiretiva(row.Id, 'print')" mat-icon-button color="accent">
+                      <mat-icon>print</mat-icon>
                     </button>
                   </td>
                 </ng-container>

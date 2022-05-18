@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
@@ -19,8 +19,7 @@ export class ReportDialogComponent implements OnInit {
   form!: FormGroup;
   actionBtn: string = this.dataService.getTranslation('SAVE', 'BUTTONS');
   name!: string;
-  publishers: any = this.dataService.publishers;
-
+  publishers: any = [];
   types: IAuxiliar[] = [];
 
   constructor(
@@ -29,46 +28,50 @@ export class ReportDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ReportDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-    private carregarSeletores() {
-      const promise1 = this.dataService.getTypes();
-      const promises = [promise1] 
-      Promise.allSettled(promises).
-        then((results) => results.forEach((result) => console.log(result.status))).
-        finally(() => this.atualizarSeletores());
-    }
+  @ViewChild("videos") videoInputField!: ElementRef;
   
-    private atualizarSeletores() {
-      this.types = this.dataService.types;
-    }
+  private carregarSeletores() {
+    const promise1 = this.dataService.getTypes();
+    const promise2 = this.dataService.getPublishersFiltered(this.data?.publishersIds!);
+    const promises = [promise1, promise2]
+    Promise.allSettled(promises).
+      then((results) => results.forEach((result) => console.log(result.status))).
+      finally(() => this.atualizarSeletores());
+  }
+
+  private atualizarSeletores() {
+    this.types = this.dataService.types;
+    this.publishers = this.dataService.publishersFiltered;
+  }
 
   ngOnInit(): void {
 
-    this.carregarSeletores();
-
     let ultimoId: number = 0;
 
-    if (this.data) {
-      if (typeof this.data == 'number') {
-        ultimoId = this.data;
-        this.data = undefined;
+    if (!this.data?.report) {
+      if (typeof this.data.registros == 'number' && this.data.registros > 0) {
+        ultimoId = this.data?.registros;
+        this.data.report = undefined;
       }
     }
 
+    this.carregarSeletores();
+
     this.form = this.formBuilder.group({
-      Id: [this.data?.Id ?? ultimoId],
-      TypeId: [this.data?.TypeId ?? -1],
-      PublisherId: [this.data?.PublisherId ?? 0],
-      CalendarId: [this.data?.CalendarId ?? this.dataService.calendarId],
-      Hours: [this.data?.Hours ?? 0],
-      Publications: [this.data?.Publications ?? 0],
-      Revisits: [this.data?.Revisits ?? 0],
-      Studies: [this.data?.Studies ?? 0],
-      Videos: [this.data?.Videos ?? 0]
+      Id: [this.data?.report?.Id ?? ultimoId],
+      TypeId: [this.data?.report?.TypeId ?? -1],
+      PublisherId: [this.data?.report?.PublisherId ?? 0],
+      CalendarId: [this.data?.report?.CalendarId ?? this.dataService.calendarId],
+      Hours: [this.data?.report?.Hours ?? 0],
+      Publications: [this.data?.report?.Publications ?? 0],
+      Revisits: [this.data?.report?.Revisits ?? 0],
+      Studies: [this.data?.report?.Studies ?? 0],
+      Videos: [this.data?.report?.Videos ?? 0]
     });
 
-    if (this.data) {
+    if (this.data?.report) {
       this.actionBtn = this.dataService.getTranslation('UPDATE', 'BUTTONS');
-      this.name = this.dataService.getPublisherName(this.data?.PublisherId);
+      this.name = this.dataService.getPublisherName(this.data?.report?.PublisherId);
     }
   }
 
@@ -87,9 +90,23 @@ export class ReportDialogComponent implements OnInit {
       this.dialogRef.close(this.actionBtn.toLowerCase());
     }
     else {
-
       console.log("Formulário com erro.");
     }
+  }
+
+  aoSelecionarPublicador() {
+    if (this.form.controls['TypeId'].value == -1) {
+      let id = this.form.controls['PublisherId'].value;
+      let typeId = this.dataService.getPublisherTypeId(id);
+      this.form.patchValue({
+        TypeId: typeId
+      });
+      this.focarNoVideo();
+    }
+  }
+
+  private focarNoVideo() {
+    this.videoInputField.nativeElement.focus();
   }
 
   selectType = this.defaultLang == 'en' ? 'Select a type' : 'Selecione o tipo';

@@ -2,100 +2,120 @@
 
     <input hidden="true" matInput type="number" formControlName="CalendarId">
 
-    <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+    <mat-tab-group mat-align-tabs="start" dynamicHeight>
 
-        <div fxFlex="66%" *ngIf="'salvar|save'.split('|').includes(actionBtn.toLowerCase())">
-            <mat-form-field appearance="outline">
+        <mat-tab label="{{ 'PUBLISHER.REPORT' | translate }}">
 
-                <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
-                <mat-select matInput placeholder="{{'PUBLISHER.NAME' | translate}}" formControlName="PublisherId">
-                    <mat-option value="-1">[ {{ selectPublisher }} ]</mat-option>
-                    <mat-option *ngFor="let pub of publishers" [value]="pub.Id">
-                        {{ pub.Name }}
-                    </mat-option>
-                </mat-select>
+            <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
+                fxLayoutGap.xs="2px">
 
-            </mat-form-field>
-        </div>
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-        <div fxFlex="66%" *ngIf="!'salvar|save'.split('|').includes(actionBtn.toLowerCase())">
-            <mat-form-field appearance="outline">
-                <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
-                <input matInput value="{{ name }}" readonly>
-            </mat-form-field>
-            <input hidden="true" matInput type="number" formControlName="PublisherId">
-        </div>
+                    <div fxFlex="66%" fxFlex.xs="100%" fxLayout="column"
+                        *ngIf="'salvar|save'.split('|').includes(actionBtn.toLowerCase())">
+                        <mat-form-field appearance="outline">
 
-        <div fxFlex="33%">
-            <mat-form-field appearance="outline">
-                <mat-label>{{'REPORT.TYPE' | translate}}</mat-label>
-                <mat-select matInput placeholder="{{'REPORT.TYPE' | translate}}" formControlName="TypeId">
-                    <mat-option value="-1">[ {{ selectType }} ]</mat-option>
-                    <mat-option *ngFor="let type of types" [value]="type.key">
-                        {{ type.value }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+                            <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.NAME' | translate}}"
+                                formControlName="PublisherId" (ngModelChange)="aoSelecionarPublicador()">
+                                <mat-option value="-1">[ {{ selectPublisher }} ]</mat-option>
+                                <mat-option *ngFor="let pub of publishers" [value]="pub.Id">
+                                    {{ pub.Name }}
+                                </mat-option>
+                            </mat-select>
 
-    </div>
+                        </mat-form-field>
+                    </div>
 
-    <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="66%" fxFlex.xs="100%" fxLayout="column"
+                        *ngIf="!'salvar|save'.split('|').includes(actionBtn.toLowerCase())">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.NAME' | translate}}</mat-label>
+                            <input matInput value="{{ name }}" readonly>
+                        </mat-form-field>
+                        <input hidden="true" matInput type="number" formControlName="PublisherId">
+                    </div>
 
-        <div fxFlex="33%">
-            <mat-form-field appearance="outline" floatLabel="always">
-                <span matPrefix> </span>
-                <mat-label>{{'REPORT.VIDEOS' | translate}}</mat-label>
-                <input matInput type="number" placeholder="{{'REPORT.VIDEOS' | translate}}" formControlName="Videos"
-                    maxlength="3" appSelectOnFocus>
-            </mat-form-field>
-        </div>
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'REPORT.TYPE' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'REPORT.TYPE' | translate}}" formControlName="TypeId">
+                                <mat-option value="-1">[ {{ selectType }} ]</mat-option>
+                                <mat-option *ngFor="let type of types" [value]="type.key">
+                                    {{ type.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
 
-        <div fxFlex="33%">
-            <mat-form-field appearance="outline" floatLabel="always">
-                <span matPrefix> </span>
-                <mat-label>{{'REPORT.PUBLICATIONS' | translate}}</mat-label>
-                <input matInput type="number" placeholder="{{'REPORT.PUBLICATIONS' | translate}}"
-                    formControlName="Publications" maxlength="3" appSelectOnFocus>
-            </mat-form-field>
-        </div>
+                </div>
 
-        <div fxFlex="33%">
-            <mat-form-field appearance="outline" floatLabel="always">
-                <span matPrefix> </span>
-                <mat-label>{{'REPORT.REVISITS' | translate}}</mat-label>
-                <input matInput type="number" placeholder="{{'REPORT.REVISITS' | translate}}" formControlName="Revisits"
-                    maxlength="3" appSelectOnFocus>
-            </mat-form-field>
-        </div>
-    </div>
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
 
-    <div fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'REPORT.VIDEOS' | translate}}</mat-label>
+                            <input #videos matInput type="number" placeholder="{{'REPORT.VIDEOS' | translate}}"
+                                formControlName="Videos" maxlength="3" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
 
-        <div fxFlex="33%">
-            <mat-form-field appearance="outline" floatLabel="always">
-                <span matPrefix> </span>
-                <mat-label>{{'REPORT.STUDIES' | translate}}</mat-label>
-                <input matInput type="number" placeholder="{{'REPORT.STUDIES' | translate}}" formControlName="Studies"
-                    maxlength="3" appSelectOnFocus>
-            </mat-form-field>
-        </div>
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'REPORT.PUBLICATIONS' | translate}}</mat-label>
+                            <input matInput type="number" placeholder="{{'REPORT.PUBLICATIONS' | translate}}"
+                                formControlName="Publications" maxlength="3" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
 
-        <div fxFlex="33%">
-            <mat-form-field appearance="outline" floatLabel="always">
-                <span matPrefix> </span>
-                <mat-label>{{'REPORT.HOURS' | translate}}</mat-label>
-                <input matInput type="number" placeholder="{{'REPORT.HOURS' | translate}}" formControlName="Hours"
-                    maxlength="3" appSelectOnFocus>
-            </mat-form-field>
-        </div>
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'REPORT.REVISITS' | translate}}</mat-label>
+                            <input matInput type="number" placeholder="{{'REPORT.REVISITS' | translate}}"
+                                formControlName="Revisits" maxlength="3" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+                </div>
 
-    </div>
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'REPORT.STUDIES' | translate}}</mat-label>
+                            <input matInput type="number" placeholder="{{'REPORT.STUDIES' | translate}}"
+                                formControlName="Studies" maxlength="3" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="33%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'REPORT.HOURS' | translate}}</mat-label>
+                            <input matInput type="number" placeholder="{{'REPORT.HOURS' | translate}}"
+                                formControlName="Hours" maxlength="3" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </mat-tab>
+
+    </mat-tab-group>
 
     <div mat-dialog-action [align]="'end'">
-        <button mat-raised-button color="warn" mat-dialog-close>{{'BUTTONS.CANCEL' | translate}}</button>
+        <button mat-raised-button color="warn" mat-dialog-close>
+            <mat-icon>cancel</mat-icon>{{'BUTTONS.CANCEL' | translate}}
+        </button>
         <button style="margin-left: 8px" mat-raised-button color="primary" (click)="adicionarRelatorio()"
-            [disabled]="form.invalid">{{ actionBtn }}</button>
+            [disabled]="form.invalid">
+            <mat-icon>save</mat-icon>{{ actionBtn }}
+        </button>
     </div>
 
 </form>

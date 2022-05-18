@@ -61,7 +61,9 @@
     },
     "REGISTER": {
       "PUBLISHER": "Publisher register",
-      "MEDICAL": "Health directives"
+      "MEDICAL": "Health directives",
+      "FRONT": "Front",
+      "BACK": "Back"
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Items per page",

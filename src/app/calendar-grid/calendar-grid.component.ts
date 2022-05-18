@@ -37,8 +37,8 @@ export const MY_FORMATS = {
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-  ],  
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
 })
 export class CalendarGridComponent implements OnInit {
 
@@ -52,7 +52,7 @@ export class CalendarGridComponent implements OnInit {
     datepicker.close();
   }
 
-  constructor(private dataService: DataService ) { }
+  constructor(private dataService: DataService) { }
 
   displayedColumns = [
     'calendar',
@@ -76,8 +76,9 @@ export class CalendarGridComponent implements OnInit {
 
   async deleteCalendar(id: number, calendar?: string) {
     let calendarPipe = new CalendarPipe();
-    if (confirm(`Deseja realmente apagar a competência (mês/ano): [${calendarPipe.transform(calendar!)}]?`)) {
+    if (confirm(`ATENÇÃO! Esse procedimento APAGARÁ todos os relatórios do mês, se houver.\nDeseja realmente apagar a competência (mês/ano): [${calendarPipe.transform(calendar!)}]?`)) {
       await this.dataService.deleteCalendar(id);
+      this.dataService.calendars = [];
       this.ngOnInit();
     }
   }
@@ -90,6 +91,7 @@ export class CalendarGridComponent implements OnInit {
         Id: this.registros,
         Calendar: calendar
       }));
+      this.dataService.calendars = [];
       this.ngOnInit()
     }
   }

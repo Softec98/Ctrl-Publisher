@@ -1,10 +1,10 @@
 .justifyLine {
-    text-align: justify;    
+    text-align: justify;
 }
 
 .justifyLine:after {
     content: "";
-    display: inline-block; 
+    display: inline-block;
     width: 100%;
 }
 

@@ -28,6 +28,7 @@ export class DataService {
   private defaultLang: string = environment.defaultLang;
 
   publishers: any = [];
+  publishersFiltered: any = [];
   calendars: CalendarDB[] = [];
   calendarId!: number;
 
@@ -63,7 +64,7 @@ export class DataService {
 
   async deleteCalendar(id: number) {
     await db.transaction('rw', db.report, db.calendar, function () {
-      db.report.orderBy('CalendarId').filter(x => x.CalendarId == id).keys().then((reportIds) => {
+      db.report.orderBy('Id').filter(x => x.CalendarId == id).keys().then((reportIds) => {
         if (reportIds && reportIds.length > 0) {
           let newIds: number[] = [];
           reportIds.forEach(x => newIds.push(Number(x.toString())));
@@ -98,6 +99,18 @@ export class DataService {
 
   async getPublishers() {
     return await db.publisher.orderBy('Name').toArray();
+  }
+
+  async getPublishersFiltered(id: number[] = []): Promise<void> {
+    this.publishersFiltered = [];
+    (await db.publisher.orderBy('Name').filter(x =>
+      x.SituationId === 1 && (id.length === 0 || id.indexOf(x.Id) === -1)).toArray()).forEach(publisher => {
+        this.publishersFiltered.push({ Id: publisher.Id, Name: publisher.Name, TypeId: publisher.IsRegularPioneer ? 3 : 1 })
+      });
+  }
+
+  getPublisherTypeId(id: number) {
+    return this.publishersFiltered.find((x: { Id: number, TypeId: number; }) => x.Id == id)?.TypeId!;
   }
 
   private getMessageLanguage(prefixo: string, campo: string, tipo: string, tam: number = 0, sufixo: string = '') {
@@ -234,7 +247,8 @@ export class DataService {
         publications: number,
         revisits: number,
         studies: number,
-        hours: number
+        hours: number,
+        publisherId: number
       }>();
 
     if (this.publishers.length == 0) {
@@ -256,7 +270,8 @@ export class DataService {
             publications: report?.Publications! ?? 0,
             revisits: report?.Revisits ?? 0,
             studies: report?.Studies! ?? 0,
-            hours: report?.Hours! ?? 0
+            hours: report?.Hours! ?? 0,
+            publisherId: report?.PublisherId ?? 0
           });
       }
     }).then(() => {
@@ -278,7 +293,6 @@ export class DataService {
   getCalendarCompet(id: number) {
     if (this.calendars.length > 0)
       return this.calendars.filter(x => x.Id == id)[0]?.Calendar! ?? 0;
-
     return 0;
   }
 
@@ -297,10 +311,14 @@ export class DataService {
 
     let indice = -1;
 
+    if (this.calendars.length == 0) {
+      this.calendars = await this.getCalendars();
+    }
+
     var compets = this.calendars.filter(x => x.Calendar.toString().startsWith(ano.toString()))
-      .map(function (calendar) { 
+      .map(function (calendar) {
         if (!summary.has(calendar.Calendar)) {
-          let mes = Number(calendar.Calendar.toString().substring(4)) -1;
+          let mes = Number(calendar.Calendar.toString().substring(4)) - 1;
           let ano = Number(calendar.Calendar.toString().substring(0, 4));
           indice++;
           summary.set(calendar.Calendar,
@@ -313,9 +331,9 @@ export class DataService {
               publishers: 0,
               aux_pioneer: 0,
               reg_pioneer: 0
-            })          
+            })
         }
-        return calendar.Id; 
+        return calendar.Id;
       });
 
     indice++;
@@ -323,7 +341,7 @@ export class DataService {
     return await db.report //.orderBy('Id').reverse()
       .filter(x => compets.includes(x.CalendarId)).each(report => {
         let compet: number = this.getCalendarCompet(report.CalendarId);
-        let mes = Number(compet.toString().substring(4)) -1;
+        let mes = Number(compet.toString().substring(4)) - 1;
         let ano = Number(compet.toString().substring(0, 4));
         if (summary.has(compet)) {
           summary.get(compet)!.amountHours += report.Hours;
@@ -350,7 +368,6 @@ export class DataService {
   }
 
   async deleteReport(id: number) {
-
     await db.transaction('rw', db.report, function () {
       db.report.delete(id);
     }).catch(function (err) {
@@ -369,9 +386,16 @@ export class DataService {
   }
 
   async addReport(data: ReportDB) {
-
     await db.transaction('rw', db.report, function () {
       db.report.add(data);
+    }).catch(function (err) {
+      console.error(err.stack || err);
+    });
+  }
+
+  async addReportBulk(data: ReportDB[]) {
+    await db.transaction('rw', db.report, function () {
+      db.report.bulkAdd(data);
     }).catch(function (err) {
       console.error(err.stack || err);
     });
@@ -387,7 +411,6 @@ export class DataService {
   }
 
   async getYears() {
-
     const summary = new Map<number, {
       index: number,
       year: number
@@ -474,7 +497,7 @@ export class DataService {
 
   async getMaritalStatusById(id: number, gender: string = 'M') {
     await this.getMaritalStatus();
-    let maritalStatus:string = this.maritalStatus.find(x => x.key == id)?.value!;
+    let maritalStatus: string = this.maritalStatus.find(x => x.key == id)?.value!;
     if (this.lang.startsWith('pt')) {
       maritalStatus = `${maritalStatus.substring(0, maritalStatus.length - 1)}${(gender == 'M' ? 'o' : 'a')}`;
     }

@@ -14,7 +14,6 @@ import { VERSION } from '@angular/material/core';
 
 export class ReportListComponent implements OnInit {
 
-  
   isHandset$: Observable<boolean> = this.media.asObservable().pipe(
     map(() =>
       this.media.isActive('xs') ||
@@ -82,5 +81,8 @@ export class ReportListComponent implements OnInit {
   mostrarCalendar: boolean = false;
   gerirCalendar() {
     this.mostrarCalendar = !this.mostrarCalendar;
+    if (!this.mostrarCalendar) {
+      this.recarregarAno();
+    }
   }
 }
