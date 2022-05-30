@@ -1,0 +1,22 @@
+[
+    {
+        "key": 1,
+        "value": "E-mail"
+    },
+    {
+        "key": 2,
+        "value": "Celular"
+    },
+    {
+        "key": 3,
+        "value": "Telefone residencial"
+    },
+    {
+        "key": 4,
+        "value": "Telefone comercial"
+    },
+    {
+        "key": 5,
+        "value": "Outros"
+    }
+]

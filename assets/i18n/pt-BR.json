@@ -4,6 +4,7 @@
       "EXISTS": "O publicador existe!"
     },
     "PUBLISHER":{
+      "CONTACT": "Contato",
       "REPORT": "Relatório",
       "THEME": "Publicador",
       "NAME": "Nome do publicador",
@@ -62,6 +63,7 @@
     "REGISTER": {
       "PUBLISHER": "Cadastro de Publicador",
       "MEDICAL": "Diretivas médicas",
+      "CONTACT": "Contatos de emergência",
       "FRONT": "Frente",
       "BACK": "Verso"
     },
@@ -80,8 +82,11 @@
       "HOURS": "Horas",
       "YEAR": "Ano"
     },
+    "CONTACT": {
+      "EMERGENCY": "Emergência"
+    },     
     "CALENDAR": {
-      "THEME": "Competência",
+"THEME": "Competência",
       "CALENDAR": "Mês e ano"
     }
 }

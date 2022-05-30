@@ -1,0 +1,22 @@
+[
+    {
+        "key": 1,
+        "value": "Email"
+    },
+    {
+        "key": 2,
+        "value": "Cell phone"
+    },
+    {
+        "key": 3,
+        "value": "Home telephone"
+    },
+    {
+        "key": 4,
+        "value": "Work telephone"
+    },
+    {
+        "key": 5,
+        "value": "Others"
+    }
+]
