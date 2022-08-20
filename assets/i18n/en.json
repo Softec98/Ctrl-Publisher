@@ -82,6 +82,10 @@
       "HOURS": "Hours",
       "YEAR": "Year"
     },
+    "CONTACT": {
+      "NAME": "Contct name",
+      "EMERGENCY": "Emergency"
+    },
     "CALENDAR": {
       "THEME": "Calendar",
       "CALENDAR": "Month and year"
