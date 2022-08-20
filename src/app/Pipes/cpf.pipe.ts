@@ -19,7 +19,7 @@ export class CpfPipe implements PipeTransform {
       );
 
     if (ocultarAlgunsValores) {
-      valorFormatado = 'XXX.' + valorFormatado.substr(4, 7) + '-XX';
+      valorFormatado = 'XXX.' + valorFormatado.substring(4, 11) + '-XX';
     }
 
     return valorFormatado;

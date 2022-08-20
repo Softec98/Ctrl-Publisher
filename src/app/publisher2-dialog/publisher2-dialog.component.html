@@ -431,6 +431,12 @@
 
         </mat-tab>
 
+        <mat-tab label="{{ (isHandset$ | async) ? tab3.split(' ')[this.defaultLang == 'en' ? 1 : 0] : tab3 }}">
+
+            <app-contact-grid publisherId="{{ this.form.controls['Id'].value }}"></app-contact-grid>
+
+        </mat-tab>
+
     </mat-tab-group>
 
     <div mat-dialog-action [align]="'end'">

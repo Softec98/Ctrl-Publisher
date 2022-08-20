@@ -7,6 +7,7 @@ import { ReportDB } from '../Core/Entities/ReportDB';
 import { CalendarDB } from '../Core/Entities/CalendarDB';
 import { IAuxiliar } from "../Core/Interfaces/IAuxiliar";
 import { Utils } from '../Core/Utils/Utils';
+import { ContactDB } from '../Core/Entities/ContactDB';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,7 @@ export class DataService {
   genders: IAuxiliar[] = [];
   states: IAuxiliar[] = [];
   types: IAuxiliar[] = [];
+  contactTypes: IAuxiliar[] = [];
 
   getBrowserLang() {
     const browserLang = this.translateService.getBrowserLang();
@@ -85,7 +87,7 @@ export class DataService {
 
   async getLastCalendar(): Promise<number> {
     return await db.calendar.orderBy('Id').last().then(calendar => {
-      return calendar?.Id ?? 0;
+      return calendar?.Id ?? 1;
     });
   }
 
@@ -188,6 +190,23 @@ export class DataService {
       ],
       'gender': [
         this.getMessageLanguage('O', 'gender', 'required')
+      ]
+    };
+  }
+
+  getContactValidation() {
+
+    return {
+      'name': [
+        this.getMessageLanguage('O', 'name', 'maxlength', 100),
+        this.getMessageLanguage('O', 'name', 'minlength', 5),
+        this.getMessageLanguage('O', 'name', 'pattern', 0,
+          this.getBrowserLang() == 'en' ? 'must contain only letters' : 'deve conter somente letras'),
+        this.getMessageLanguage('O', 'name', 'required')
+      ],
+      'email': [
+        this.getMessageLanguage('O', 'email', 'pattern', 0,
+          this.getBrowserLang() == 'en' ? 'is invalid' : ' é inválido')
       ]
     };
   }
@@ -381,7 +400,7 @@ export class DataService {
 
   async getLastReport(): Promise<number> {
     return await db.report.orderBy('Id').last().then(report => {
-      return report?.Id ?? 0;
+      return report?.Id ?? 1;
     });
   }
 
@@ -405,6 +424,88 @@ export class DataService {
 
     await db.transaction('rw', db.report, function () {
       db.report.update(data.Id, data);
+    }).catch(function (err) {
+      console.error(err.stack || err);
+    });
+  }
+
+  async getContactsByPublisher(publisherId: number) {
+
+    let summary = new Map<string,
+      {
+        Id: number,
+        name: string,
+        zipCode?: string,
+        address?: string,
+        complement?: string,
+        number?: number,
+        suburb?: string,
+        city?: string,
+        state?: string,
+        areaCode?: string,
+        phoneNumber?: string,
+        cellPhone?: string,
+        email?: string,
+        remark?: string,
+        publisherId: number
+      }>();
+
+    return await db.contact.filter(x => x.PublisherId == publisherId).each(async contact => {
+      if (!summary.has(contact.Name)) {
+        summary.set(contact.Name,
+          {
+            Id: contact.Id,
+            name: contact.Name,
+            zipCode: contact?.ZipCode,
+            address: contact?.Address,
+            complement: contact?.Complement,
+            number: contact?.Number,
+            suburb: contact?.Suburb,
+            city: contact?.City,
+            state: contact?.State,
+            areaCode: contact?.AreaCode,
+            phoneNumber: contact?.PhoneNumber,
+            cellPhone: contact?.CellPhone,
+            email: contact?.Email,
+            remark: contact?.Remark,
+            publisherId: contact?.PublisherId ?? 0
+          });
+      }
+    }).then(() => {
+      return Array.from(new Map([...summary.entries()].sort()).values());
+    });
+  }
+
+  async deleteContact(id: number) {
+    await db.transaction('rw', db.contact, function () {
+      db.contact.delete(id);
+    }).catch(function (err) {
+      console.error(err.stack || err);
+    });
+  }
+
+  async getContact(id: number) {
+    return await db.contact.get(id);
+  }
+
+  async getLastContact(): Promise<number> {
+    return await db.contact.orderBy('Id').last().then(contact => {
+      return contact?.Id ?? 1;
+    });
+  }
+
+  async addContact(data: ContactDB) {
+    await db.transaction('rw', db.contact, function () {
+      db.contact.add(data);
+    }).catch(function (err) {
+      console.error(err.stack || err);
+    });
+  }
+
+  async editContact(data: ContactDB) {
+
+    await db.transaction('rw', db.contact, function () {
+      db.contact.update(data.Id, data);
     }).catch(function (err) {
       console.error(err.stack || err);
     });
@@ -544,5 +645,19 @@ export class DataService {
   getTypeById(id: number) {
     this.getTypes();
     return this.types.find(x => x.key == id)?.value!;
+  }
+
+  async getContactTypes(): Promise<void> {
+    if (this.contactTypes.length == 0) {
+      this.getLang();
+      await Utils.getAuxiliar(`contactType-${this.lang}`).then((aux) => {
+        this.contactTypes = aux;
+      });
+    }
+  }
+
+  getContactTypeById(id: number) {
+    this.getContactTypes();
+    return this.contactTypes.find(x => x.key == id)?.value!;
   }
 }

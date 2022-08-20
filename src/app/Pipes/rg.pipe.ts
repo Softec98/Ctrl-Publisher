@@ -17,7 +17,7 @@ export class RgPipe implements PipeTransform {
       );
 
     if (ocultarAlgunsValores) {
-      valorFormatado = 'XXX.' + valorFormatado.substr(4, 7) + '-XX';
+      valorFormatado = 'XXX.' + valorFormatado.substring(4, 7) + '-XX';
     }
 
     return valorFormatado;

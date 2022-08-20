@@ -28,7 +28,7 @@
     <button mat-raised-button color="warn" mat-dialog-close>
         <mat-icon>cancel</mat-icon> {{'BUTTONS.CANCEL' | translate}}
     </button>
-    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="this.print();">
+    <button style="margin-left: 8px" mat-raised-button color="primary" (click)="this.print();" *ngIf="! (isHandset$ | async)">
         <mat-icon>print</mat-icon>{{ 'BUTTONS.PRINT' | translate }}
     </button>
     <button style="margin-left: 8px" mat-raised-button color="accent" (click)="this.print('download');">

@@ -68,6 +68,8 @@ import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.compo
 import { PromptComponent } from './prompt/prompt.component';
 import { PwaService } from './Services/pwa.service';
 import { DiretivaDialogComponent } from './diretiva-dialog/diretiva-dialog.component';
+import { ContactGridComponent } from './contact-grid/contact-grid.component';
+import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
 
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
@@ -113,7 +115,9 @@ export const MY_FORMATS = {
     RgPipe,
     SpinnerOverlayComponent,
     PromptComponent,
-    DiretivaDialogComponent
+    DiretivaDialogComponent,
+    ContactGridComponent,
+    ContactDialogComponent
   ],
   imports: [
     MatDatepickerModule,

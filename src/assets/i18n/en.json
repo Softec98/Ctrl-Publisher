@@ -4,6 +4,7 @@
       "EXISTS": "Publisher exists!"
     },
     "PUBLISHER":{
+      "CONTACT": "Contact",
       "REPORT": "Report",
       "THEME": "Publisher",
       "NAME": "Publisher Name",
@@ -62,6 +63,7 @@
     "REGISTER": {
       "PUBLISHER": "Publisher register",
       "MEDICAL": "Health directives",
+      "CONTACT": "Emergency contacts",
       "FRONT": "Front",
       "BACK": "Back"
     },
@@ -79,6 +81,10 @@
       "STUDIES": "Studies",
       "HOURS": "Hours",
       "YEAR": "Year"
+    },
+    "CONTACT": {
+      "NAME": "Contct name",
+      "EMERGENCY": "Emergency"
     },
     "CALENDAR": {
       "THEME": "Calendar",

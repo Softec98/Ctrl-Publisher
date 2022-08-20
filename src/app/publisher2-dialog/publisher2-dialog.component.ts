@@ -46,6 +46,7 @@ export class Publisher2DialogComponent implements OnInit {
   actionBtn: string = this.dataService.getTranslation('SAVE', 'BUTTONS');
   tab1: string = this.dataService.getTranslation('PUBLISHER', 'REGISTER');
   tab2: string = this.dataService.getTranslation('MEDICAL', 'REGISTER');
+  tab3: string = this.dataService.getTranslation('CONTACT', 'REGISTER');
 
   listaExclusao1!: string;
   listaExclusao2!: string;

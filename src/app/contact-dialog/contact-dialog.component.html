@@ -1,0 +1,165 @@
+<form [formGroup]="form">
+
+    <mat-tab-group mat-align-tabs="start" dynamicHeight>
+
+        <mat-tab label="{{ (isHandset$ | async) ? tab1.split(' ')[ this.defaultLang == 'en' ? 1 : 0] : tab1 }}">
+
+            <div class="tab-content" mat-dialog-content fxLayout="column" fxLayoutAlign="left" fxLayoutGap="5px"
+                fxLayoutGap.xs="2px">
+
+                <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'CONTACT.NAME' | translate}}</mat-label>
+                        <input formControlName="Name" matInput placeholder="{{'CONTACT.NAME' | translate}}"
+                            maxlength="100" required>
+                        <mat-error *ngFor="let validation of contact_validation_messages.name">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['Name'].errors?.[validation.type] && (form.controls['Name'].dirty || form.controls['Name'].touched)">
+                                {{validation.message}}</mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'PUBLISHER.EMAIL' | translate}}</mat-label>
+
+                        <mat-icon matPrefix>email</mat-icon>
+                        <span matPrefix></span>
+
+                        <input formControlName="Email" matInput placeholder="{{'PUBLISHER.EMAIL' | translate}}"
+                            maxlength="100">
+
+                        <mat-error *ngFor="let validation of contact_validation_messages.email">
+                            <mat-error class="error-message"
+                                *ngIf="form.controls['Email'].errors?.[validation.type] && (form.controls['Email'].dirty || form.controls['Email'].touched)">
+                                {{validation.message}}
+                            </mat-error>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.ZIPCODE' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.ZIPCODE' | translate}}" formControlName="ZipCode"
+                                (keyup.enter)="obterEndereco()" appMaskCep appSelectOnFocus>
+                            <button matSuffix mat-button>
+                                <mat-icon (click)="obterEndereco()">search</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="90%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.ADDRESS' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.ADDRESS' | translate}}" formControlName="Address"
+                                maxlength="100">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="160px" fxLayout="column">
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.NUMBER' | translate}}</mat-label>
+                            <input #number matInput type="number" placeholder="{{'PUBLISHER.NUMBER' | translate}}"
+                                formControlName="Number" maxlength="10" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.COMPLEMENT' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.COMPLEMENT' | translate}}"
+                                formControlName="Complement" maxlength="30">
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.SUBURB' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.SUBURB' | translate}}" formControlName="Suburb"
+                                maxlength="80">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayout.xs="row wrap" fxLayoutGap="12px" fxLayoutGap.xs="2px">
+                    <div fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.STATE' | translate}}</mat-label>
+                            <mat-select matInput placeholder="{{'PUBLISHER.STATE' | translate}}"
+                                formControlName="State">
+                                <mat-option value="-1">[ {{ selectState }} ]</mat-option>
+                                <mat-option *ngFor="let st of states" [value]="st.key">
+                                    {{ st.key }}-{{ st.value }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="80%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.CITY' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.CITY' | translate}}" formControlName="City"
+                                maxlength="100">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px">
+
+                    <div fxFlex="12%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <span matPrefix> </span>
+                            <mat-label>{{'PUBLISHER.AREACODE' | translate}}</mat-label>
+                            <input matInput placeholder="{{'PUBLISHER.AREACODE' | translate}}"
+                                formControlName="AreaCode" maxlength="2" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="44%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.PHONENUMBER' | translate}}</mat-label>
+                            <span matPrefix></span>
+                            <mat-icon matPrefix>phone</mat-icon>
+                            <input matInput placeholder="{{'PUBLISHER.PHONENUMBER' | translate}}"
+                                formControlName="PhoneNumber" [textMask]="foneMask(8)" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="44%" fxFlex.xs="100%" fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'PUBLISHER.CELLPHONE' | translate}}</mat-label>
+                            <span matPrefix></span>
+                            <mat-icon matPrefix>phone</mat-icon>
+                            <input matInput placeholder="{{'PUBLISHER.CELLPHONE' | translate}}"
+                                formControlName="CellPhone" [textMask]="foneMask()" appSelectOnFocus>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="warn" mat-dialog-close>
+            <mat-icon>cancel</mat-icon>{{'BUTTONS.CANCEL' | translate}}
+        </button>
+        <button style="margin-left: 8px" mat-raised-button color="primary" (click)="adicionarContato()"
+            [disabled]="form.invalid">
+            <mat-icon>save</mat-icon>{{ actionBtn }}
+        </button>
+    </div>
+
+</form>

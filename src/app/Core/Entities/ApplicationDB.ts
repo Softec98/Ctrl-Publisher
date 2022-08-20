@@ -2,12 +2,14 @@ import Dexie from 'dexie';
 import { PublisherDB } from "./PublisherDB";
 import { ReportDB } from './ReportDB';
 import { CalendarDB } from './CalendarDB';
+import { ContactDB } from './ContactDB';
 
 export class ApplicationDB extends Dexie {
 
     publisher!: Dexie.Table<PublisherDB, number>;
     report!: Dexie.Table<ReportDB, number>;
     calendar!: Dexie.Table<CalendarDB, number>;
+    contact!: Dexie.Table<ContactDB, number>;
 
     constructor() {
         super("PublisherControlDB");
@@ -15,12 +17,14 @@ export class ApplicationDB extends Dexie {
         this.version(1).stores({
             publisher: "++Id, Name, NationalId, Gender, AssignmentId, GroupId, SituationId", // baptismDate, birthDate, isAnointed, assignmentId, isRegularPioneer, groupId, situationId, gender, zipCode, address, complement, number, suburb, city, state, areaCode, phoneNumber, cellPhone, email, remark, sequenceNumber, generalId, nationalId, ocupation, maritalStatusId, isLegalRepresentative, nationality, witness1Name, witness1GeneralId, witness2Name, witness2GeneralId, legalRepresentative1Id, legalRepresentative2Id, fillDate
             report: "++Id, PublisherId, CalendarId, TypeId", // Publications, Videos, Hours, Revisits, Studies
-            calendar: "++Id, Calendar"
+            calendar: "++Id, Calendar",
+            contact: "++Id, PublisherId, TypeId"
         });
 
         this.publisher.mapToClass(PublisherDB);
         this.report.mapToClass(ReportDB);
         this.calendar.mapToClass(CalendarDB);
+        this.contact.mapToClass(ContactDB);
 
         this.on('populate', () => this.populate());
     }
@@ -105,8 +109,7 @@ export class ApplicationDB extends Dexie {
                 LegalRepresentative1Id: 1,
                 LegalRepresentative2Id: 0,
                 FillDate: new Date()
-            })
-            ,
+            }),
             new PublisherDB({
                 Id: 3,
                 NationalId: '54558356021',

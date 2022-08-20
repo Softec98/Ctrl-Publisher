@@ -23,15 +23,129 @@
     </div>
 
     <div class="container">
-      <mat-card class="card">
-        <mat-card-content>
-          <div style="margin-top: 10px">
-            <mat-form-field appearance="standard">
-              <mat-label>{{ 'BUTTONS.FILTER' | translate }}</mat-label>
-              <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Maria" #input>
-            </mat-form-field>
 
-            <div class="mat-elevation-z8">
+      <mat-card class="card">
+
+        <mat-card-content>
+
+          <div>
+
+            <mat-accordion class="example-headers-align">
+
+              <mat-expansion-panel [hideToggle]="!(isHandset$ | async)" [expanded]="panelOpenState" #exppanel>
+
+                <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+
+                  <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px" fxFlex="100%">
+
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="column">
+                      <mat-form-field appearance="standard">
+                        <mat-label>{{ 'BUTTONS.FILTER' | translate }}</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Maria" #input>
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                </mat-expansion-panel-header>
+
+                <div fxLayout.xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="2px" fxFlex="100%">
+
+                  <div fxFlex="16%" fxFlex.xs="100%" fxLayout="column" *ngIf="exppanel.expanded">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'PUBLISHER.ASSIGNMENTID' | translate}}</mat-label>
+                      <mat-select matInput placeholder="{{'PUBLISHER.ASSIGNMENTID' | translate}}"
+                        formControlName="AssignmentId" (selectionChange)="onselect($event)">
+                        <mat-option value="-1">[ {{ selectAssignment }} ]</mat-option>
+                        <mat-option *ngFor="let am of assignments" [value]="am.key">
+                          {{ am.value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex="16%" fxFlex.xs="100%" fxLayout="column" *ngIf="exppanel.expanded">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'PUBLISHER.SITUATIONID' | translate}}</mat-label>
+                      <mat-select matInput placeholder="{{'PUBLISHER.SITUATIONID' | translate}}"
+                        formControlName="SituationId" (selectionChange)="onselect($event)">
+                        <mat-option value="-1">[ {{ selectSituation }} ]</mat-option>
+                        <mat-option *ngFor="let si of situations" [value]="si.key">
+                          {{ si.value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div fxFlex="16%" fxFlex.xs="100%" fxLayout="column" *ngIf="exppanel.expanded">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{'PUBLISHER.GROUPID' | translate}}</mat-label>
+                      <mat-select matInput placeholder="{{'PUBLISHER.GROUPID' | translate}}" 
+                        formControlName="GroupId" (selectionChange)="onselect($event)">
+                        <mat-option value="-1">[ {{ selectGroup }} ]</mat-option>
+                        <mat-option *ngFor="let gr of groups" [value]="gr.key">
+                          {{ gr.value }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+              </mat-expansion-panel>
+
+            </mat-accordion>
+
+            <!-- <div fxLayoutGap="10px" fxLayoutGap.xs="2px" *ngIf="! (isHandset$ | async)">
+
+              <div fxFlex="50%" fxLayout="column">
+                <mat-form-field appearance="standard">
+                  <mat-label>{{ 'BUTTONS.FILTER' | translate }}</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Ex: Maria" #input>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="16%" fxLayout="column">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{'PUBLISHER.ASSIGNMENTID' | translate}}</mat-label>
+                  <mat-select matInput placeholder="{{'PUBLISHER.ASSIGNMENTID' | translate}}"
+                    formControlName="AssignmentId">
+                    <mat-option value="-1">[ {{ selectAssignment }} ]</mat-option>
+                    <mat-option *ngFor="let am of assignments" [value]="am.key">
+                      {{ am.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="16%" fxLayout="column">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{'PUBLISHER.SITUATIONID' | translate}}</mat-label>
+                  <mat-select matInput placeholder="{{'PUBLISHER.SITUATIONID' | translate}}"
+                    formControlName="SituationId">
+                    <mat-option value="-1">[ {{ selectSituation }} ]</mat-option>
+                    <mat-option *ngFor="let si of situations" [value]="si.key">
+                      {{ si.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="16%" fxLayout="column">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{'PUBLISHER.GROUPID' | translate}}</mat-label>
+                  <mat-select matInput placeholder="{{'PUBLISHER.GROUPID' | translate}}" formControlName="GroupId">
+                    <mat-option value="-1">[ {{ selectGroup }} ]</mat-option>
+                    <mat-option *ngFor="let gr of groups" [value]="gr.key">
+                      {{ gr.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+            </div> -->
+
+            <div class="mat-elevation-z8" style="margin-top: 10px;">
               <table mat-table [dataSource]="dataSource" matSort>
 
                 <ng-container matColumnDef="name">
@@ -42,7 +156,7 @@
                 <ng-container matColumnDef="nationalId">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>{{'PUBLISHER.NATIONALID' |
                     translate}}</th>
-                  <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{row.NationalId | cpf:false }} </td>
+                  <td mat-cell *matCellDef="let row" fxHide fxShow.gt-sm> {{row.NationalId | cpf:true }} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="cellPhone">
@@ -95,15 +209,20 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                 <tr class="mat-row" *matNoDataRow>
-                  <td class="mat-cell" colspan="4" *ngIf="input.value">Nenhum publicador encontrado com o filtro: "{{input.value}}"</td>
+                  <td class="mat-cell" colspan="4" *ngIf="input.value">Nenhum publicador encontrado com o filtro:
+                    "{{input.value}}"</td>
                   <td class="mat-cell" colspan="4" *ngIf="!(input.value)">Nenhum publicador cadastrado</td>
                 </tr>
+
               </table>
 
               <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
             </div>
+
           </div>
+
         </mat-card-content>
+
       </mat-card>
     </div>
   </div>
