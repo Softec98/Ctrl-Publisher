@@ -111,7 +111,7 @@ export class Dashboard2Component implements OnInit {
           }
         }
         else 
-          retorno = filter.length < 4 || data.Name.toLowerCase().includes(filter) ? true : false; 
+          retorno = filter.length < 3 || data.Name.toLowerCase().includes(filter) ? true : false; 
         return retorno;
       }
       

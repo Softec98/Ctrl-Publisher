@@ -70,6 +70,7 @@ import { PwaService } from './Services/pwa.service';
 import { DiretivaDialogComponent } from './diretiva-dialog/diretiva-dialog.component';
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
+import { VersionsComponent } from './versions/versions.component';
 
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
@@ -117,7 +118,8 @@ export const MY_FORMATS = {
     PromptComponent,
     DiretivaDialogComponent,
     ContactGridComponent,
-    ContactDialogComponent
+    ContactDialogComponent,
+    VersionsComponent
   ],
   imports: [
     MatDatepickerModule,
