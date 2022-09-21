@@ -110,6 +110,11 @@
         "capitalValue": "Boa Vista"
     },
     {
+        "key": "RS",
+        "value": "Rio Grande do Sul",
+        "capitalValue": "Porto Alegre"
+    },
+    {
         "key": "SC",
         "value": "Santa Catarina",
         "capitalValue": "Florianópolis"

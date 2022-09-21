@@ -46,7 +46,7 @@ export class PublisherDB {
         this.BirthDate = new Date(init?.BirthDate!);
         this.BaptismDate = new Date(init?.BaptismDate!);
 
-        // Remover a formação dos campos, deixando apenas números
+        // Remover a formatação dos campos, deixando apenas números
         this.NationalId = Utils.OnlyNumbers(init?.NationalId!);
         this.GeneralId = Utils.OnlyNumbers(init?.GeneralId!);
         this.ZipCode = Utils.OnlyNumbers(init?.ZipCode!);
